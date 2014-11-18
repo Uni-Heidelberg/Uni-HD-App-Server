@@ -1,11 +1,17 @@
 {
     "name": "MensaMeal",
     "base": "PersistedModel",
+    "indexes": {
+        "uniqueIndex": {
+            "columns": "title, priceStud, priceBed, priceGuest",
+            "kind": "unique"
+        }
+    },
     "properties": {
         "title": {
             "type": "string",
-            "length": 200,
-            "required": true
+            "required": true,
+            "length": 200
         },
         "priceStud": {
             "type": "number",
@@ -32,11 +38,5 @@
         }
     },
     "acls": [],
-    "methods": [],
-    "indexes": {
-        "uniqueIndex": {
-            "columns": "title, priceStud, priceBed, priceGuest",
-            "kind": "unique"
-        }
-    }
+    "methods": []
 }

@@ -9,6 +9,10 @@
         "location": {
             "type": "geopoint",
             "required": true
+        },
+        "parsable": {
+            "type": "boolean",
+            "default": 0
         }
     },
     "validations": [],

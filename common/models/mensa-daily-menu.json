@@ -1,6 +1,12 @@
 {
     "name": "MensaDailyMenu",
     "base": "PersistedModel",
+    "indexes": {
+        "uniqueIndex": {
+            "columns": "date, sectionId",
+            "kind": "unique"
+        }
+    },
     "properties": {
         "date": {
             "type": "date",
@@ -21,11 +27,5 @@
         }
     },
     "acls": [],
-    "methods": [],
-    "indexes": {
-        "uniqueIndex": {
-            "columns": "date, sectionId",
-            "kind": "unique"
-        }
-    }
+    "methods": []
 }

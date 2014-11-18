@@ -1,9 +1,16 @@
 {
     "name": "MensaSection",
     "base": "PersistedModel",
+    "indexes": {
+        "uniqueIndex": {
+            "columns": "title, mensaId",
+            "kind": "unique"
+        }
+    },
     "properties": {
         "title": {
             "type": "string",
+            "length": 20,
             "required": true
         }
     },
