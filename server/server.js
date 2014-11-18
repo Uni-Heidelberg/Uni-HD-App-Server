@@ -39,7 +39,7 @@ app.start = function () {
 
 var mensaParser = require('./lib/mensaParser.js');
 
-mensaParser.parseAll(app);
+mensaParser(app);
 
 // start the server if `$ node server.js`
 if (require.main === module) {

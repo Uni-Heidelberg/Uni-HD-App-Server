@@ -7,7 +7,7 @@ var jsdom = require('jsdom');
 var jQuery = require('jquery');
 var async = require('async');
 
-exports.parseAll = function (app) {
+module.exports = function (app) {
 
     // Importieren der Module in den lokalen Namensraum
     var Mensa = app.models.Mensa;
@@ -132,7 +132,7 @@ exports.parseAll = function (app) {
                                                                 return;
                                                             }
                                                             menu.meals.add(meal, function (err) {
-                                                                if(err) {
+                                                                if (err) {
                                                                     console.log('Error adding meal to menu');
                                                                     console.log(err);
                                                                     return;
