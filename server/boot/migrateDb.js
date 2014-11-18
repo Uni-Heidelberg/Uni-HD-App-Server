@@ -7,8 +7,6 @@ module.exports = function (app) {
     var NewsItem = app.models.NewsItem;
 
     var Mensa = app.models.Mensa;
-    var MensaDailyMenu = app.models.MensaDailyMenu;
-    var MensaMeal = app.models.MensaMeal;
     var MensaSection = app.models.MensaSection;
 
     var feedRead = require('feed-read');
@@ -94,57 +92,82 @@ module.exports = function (app) {
             }
         });
 
-        Mensa.create(
-            {
-                'title': 'Zentralmensa',
-                'location': {
-                    'lat': 11,
-                    'lng': 11
-                }
-            }, function (err, mensa) {
-                MensaSection.create(
-                    {
-                        'title': 'Ausgabe A',
-                        'mensa': mensa
-                    },
-                    function (err, section) {
-                        MensaDailyMenu.create(
-                            {
-                                'date': '2014-11-18',
-                                'section': section
-                            },
-                            function (err, dailyMenu) {
-                                dailyMenu.meals.create({
-                                    'title': 'Kartoffeln',
-                                    'price': 0.30
-                                }, function (err, meal) {
-                                });
-                            }
-                        );
-                        MensaMeal.create(
-                            {
-                                'title': 'Braten',
-                                'price': 1.30
-                            }
-                        );
-
-
-                        MensaDailyMenu.findById(1, function (err, menu) {
-                            if (!menu) {
-                                return;
-                            }
-                            MensaMeal.findById(2, function (err, meal) {
-                                if (!meal) {
-                                    return;
-                                }
-                                menu.meals.add(meal, function (err) {
-                                });
-                            });
-                        });
-                    }
-                );
+        Mensa.count(function (err, count) {
+            if (err || count !== 0) {
+                return;
             }
-        );
+
+            Mensa.create(
+                {
+                    'title': 'Mensa Im Neuenheimer Feld 304',
+                    'location': {
+                        'lat': 49.41561,
+                        'lng': 8.67072
+                    }
+                },
+                function (err, mensa) {
+                    if (err)
+                        throw err;
+
+                    MensaSection.create({
+                        'title': 'A+B',
+                        'mensa': mensa
+                    });
+                    MensaSection.create({
+                        'title': 'D',
+                        'mensa': mensa
+                    });
+                    MensaSection.create({
+                        'title': 'E',
+                        'mensa': mensa
+                    });
+                }
+            );
+            Mensa.create(
+                {
+                    'title': 'zeughaus-Mensa im Marstall',
+                    'location': {
+                        'lat': 49.41299,
+                        'lng': 8.70476
+                    }
+                },
+                function (err, mensa) {
+                    if (err)
+                        throw err;
+
+                    MensaSection.create({
+                        'title': 'Buffet',
+                        'mensa': mensa
+                    });
+                }
+            );
+            Mensa.create(
+                {
+                    'title': 'Triplex-Mensa am Uniplatz',
+                    'location': {
+                        'lat': 49.41068,
+                        'lng': 8.70576
+                    }
+                },
+                function (err, mensa) {
+                    if (err)
+                        throw err;
+
+                    MensaSection.create({
+                        'title': 'A',
+                        'mensa': mensa
+                    });
+                    MensaSection.create({
+                        'title': 'B',
+                        'mensa': mensa
+                    });
+                    MensaSection.create({
+                        'title': 'C',
+                        'mensa': mensa
+                    });
+                }
+            );
+        });
     }
 
     db.isActual(function (err, actual) {

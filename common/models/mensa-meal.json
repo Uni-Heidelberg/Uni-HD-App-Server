@@ -4,9 +4,20 @@
     "properties": {
         "title": {
             "type": "string",
+            "length": 200,
             "required": true
         },
-        "price": {
+        "priceStud": {
+            "type": "number",
+            "required": true,
+            "dataType": "double"
+        },
+        "priceBed": {
+            "type": "number",
+            "required": true,
+            "dataType": "double"
+        },
+        "priceGuest": {
             "type": "number",
             "required": true,
             "dataType": "double"
@@ -21,5 +32,11 @@
         }
     },
     "acls": [],
-    "methods": []
+    "methods": [],
+    "indexes": {
+        "uniqueIndex": {
+            "columns": "title, priceStud, priceBed, priceGuest",
+            "kind": "unique"
+        }
+    }
 }

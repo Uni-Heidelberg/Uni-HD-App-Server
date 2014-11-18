@@ -21,5 +21,11 @@
         }
     },
     "acls": [],
-    "methods": []
+    "methods": [],
+    "indexes": {
+        "uniqueIndex": {
+            "columns": "date, sectionId",
+            "kind": "unique"
+        }
+    }
 }
