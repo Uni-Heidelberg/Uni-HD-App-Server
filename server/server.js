@@ -41,6 +41,22 @@ var mensaParser = require('./lib/mensaParser.js');
 
 mensaParser(app);
 
+var Agenda = require('agenda');
+
+var agenda = new Agenda(
+    {
+        'db': {
+            'address': 'localhost:27017/appserver'
+        }
+    }
+);
+
+require('./lib/jobs/news.js')(agenda);
+
+agenda.every('5 minutes', 'reloading news');
+
+agenda.start();
+
 // start the server if `$ node server.js`
 if (require.main === module) {
     app.start();
