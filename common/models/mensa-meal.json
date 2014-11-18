@@ -1,0 +1,29 @@
+{
+  "name": "MensaMeal",
+  "base": "PersistedModel",
+  "properties": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "price": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "menus": {
+      "type": "hasAndBelongsToMany",
+      "model": "MensaDailyMenu",
+      "foreignKey": ""
+    },
+    "sections": {
+      "type": "hasAndBelongsToMany",
+      "model": "MensaSection",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": []
+}

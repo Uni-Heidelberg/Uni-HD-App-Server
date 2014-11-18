@@ -2,6 +2,12 @@
   "name": "NewsItem",
   "base": "PersistedModel",
   "properties": {
+    "id": {
+      "type": "number",
+      "required": true,
+      "id": true,
+      "generated": true
+    },
     "title": {
       "type": "string",
       "required": true
@@ -21,6 +27,11 @@
     "url": {
       "type": "string",
       "required": true
+    },
+    "urlHash": {
+      "type": "string",
+      "required": true,
+      "id": true
     }
   },
   "validations": [],

@@ -1,0 +1,20 @@
+{
+  "name": "MensaSection",
+  "base": "PersistedModel",
+  "properties": {
+    "title": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "meals": {
+      "type": "hasAndBelongsToMany",
+      "model": "MensaMeal",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": []
+}

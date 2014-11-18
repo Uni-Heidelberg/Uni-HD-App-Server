@@ -1,11 +1,11 @@
 {
   "appserver": {
-    "name": "appserver",
-    "connector": "mysql",
     "host": "localhost",
     "port": 3306,
     "database": "appserver",
     "username": "appserver",
-    "password": "appserver"
+    "password": "appserver",
+    "name": "appserver",
+    "connector": "mysql"
   }
 }

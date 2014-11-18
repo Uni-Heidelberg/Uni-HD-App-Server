@@ -18,5 +18,21 @@
   "NewsItem": {
     "dataSource": "appserver",
     "public": true
+  },
+  "Mensa": {
+    "dataSource": "appserver",
+    "public": true
+  },
+  "MensaSection": {
+    "dataSource": "appserver",
+    "public": true
+  },
+  "MensaDailyMenu": {
+    "dataSource": "appserver",
+    "public": true
+  },
+  "MensaMeal": {
+    "dataSource": "appserver",
+    "public": true
   }
 }
