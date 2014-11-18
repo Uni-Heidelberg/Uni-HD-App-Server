@@ -2,12 +2,6 @@
   "name": "NewsItem",
   "base": "PersistedModel",
   "properties": {
-    "id": {
-      "type": "number",
-      "required": true,
-      "id": true,
-      "generated": true
-    },
     "title": {
       "type": "string",
       "required": true
@@ -22,7 +16,7 @@
     },
     "thumbImageUrl": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "url": {
       "type": "string",
@@ -30,8 +24,8 @@
     },
     "urlHash": {
       "type": "string",
-      "required": true,
-      "id": true
+
+      "required": true
     }
   },
   "validations": [],
@@ -39,7 +33,7 @@
     "source": {
       "type": "belongsTo",
       "model": "NewsSource",
-      "foreignKey": ""
+      "foreignKey": "sourceId"
     }
   },
   "acls": [],
