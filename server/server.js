@@ -37,10 +37,6 @@ app.start = function () {
     });
 };
 
-var mensaParser = require('./lib/mensaParser.js');
-
-mensaParser(app);
-
 var Agenda = require('agenda');
 
 var agenda = new Agenda(
@@ -52,8 +48,10 @@ var agenda = new Agenda(
 );
 
 require('./lib/jobs/news.js')(agenda);
+require('./lib/jobs/mensaParser.js')(agenda);
 
-agenda.every('5 minutes', 'reloading news');
+agenda.every('day', 'reloading news');
+agenda.every('day', 'parse mensa content');
 
 agenda.start();
 

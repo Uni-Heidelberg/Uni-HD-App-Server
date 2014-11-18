@@ -12,6 +12,8 @@ module.exports = function (agenda) {
     agenda.define(
         'reloading news',
         function (job, done) {
+            console.log('Starting parsing news sources'),
+
             NewsSource.find(function (err, sources) {
                 async.each(
                     sources,
