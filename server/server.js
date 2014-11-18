@@ -37,6 +37,10 @@ app.start = function () {
     });
 };
 
+var mensaParser = require('./lib/mensaParser.js');
+
+mensaParser.parseAll(app);
+
 // start the server if `$ node server.js`
 if (require.main === module) {
     app.start();
