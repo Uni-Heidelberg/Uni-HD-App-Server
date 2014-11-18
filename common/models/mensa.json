@@ -1,29 +1,29 @@
 {
-  "name": "Mensa",
-  "base": "PersistedModel",
-  "properties": {
-    "title": {
-      "type": "string",
-      "required": true
+    "name": "Mensa",
+    "base": "PersistedModel",
+    "properties": {
+        "title": {
+            "type": "string",
+            "required": true
+        },
+        "location": {
+            "type": "geopoint",
+            "required": true
+        }
     },
-    "location": {
-      "type": "geopoint",
-      "required": true
-    }
-  },
-  "validations": [],
-  "relations": {
-    "sections": {
-      "type": "hasMany",
-      "model": "MensaSection",
-      "foreignKey": ""
+    "validations": [],
+    "relations": {
+        "sections": {
+            "type": "hasMany",
+            "model": "MensaSection",
+            "foreignKey": ""
+        },
+        "dailyMenus": {
+            "type": "hasMany",
+            "model": "MensaDailyMenu",
+            "foreignKey": ""
+        }
     },
-    "dailyMenus": {
-      "type": "hasMany",
-      "model": "MensaDailyMenu",
-      "foreignKey": ""
-    }
-  },
-  "acls": [],
-  "methods": []
+    "acls": [],
+    "methods": []
 }

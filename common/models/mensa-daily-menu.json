@@ -1,20 +1,20 @@
 {
-  "name": "MensaDailyMenu",
-  "base": "PersistedModel",
-  "properties": {
-    "date": {
-      "type": "date",
-      "required": true
-    }
-  },
-  "validations": [],
-  "relations": {
-    "meals": {
-      "type": "hasAndBelongsToMany",
-      "model": "MensaMeal",
-      "foreignKey": ""
-    }
-  },
-  "acls": [],
-  "methods": []
+    "name": "MensaDailyMenu",
+    "base": "PersistedModel",
+    "properties": {
+        "date": {
+            "type": "date",
+            "required": true
+        }
+    },
+    "validations": [],
+    "relations": {
+        "meals": {
+            "type": "hasAndBelongsToMany",
+            "model": "MensaMeal",
+            "foreignKey": ""
+        }
+    },
+    "acls": [],
+    "methods": []
 }

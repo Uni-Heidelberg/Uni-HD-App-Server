@@ -1,3 +1,3 @@
-module.exports = function(Mensa) {
+module.exports = function (Mensa) {
 
 };

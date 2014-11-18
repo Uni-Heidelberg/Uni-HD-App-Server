@@ -1,29 +1,29 @@
 {
-  "name": "MensaMeal",
-  "base": "PersistedModel",
-  "properties": {
-    "title": {
-      "type": "string",
-      "required": true
+    "name": "MensaMeal",
+    "base": "PersistedModel",
+    "properties": {
+        "title": {
+            "type": "string",
+            "required": true
+        },
+        "price": {
+            "type": "number",
+            "required": true
+        }
     },
-    "price": {
-      "type": "number",
-      "required": true
-    }
-  },
-  "validations": [],
-  "relations": {
-    "menus": {
-      "type": "hasAndBelongsToMany",
-      "model": "MensaDailyMenu",
-      "foreignKey": ""
+    "validations": [],
+    "relations": {
+        "menus": {
+            "type": "hasAndBelongsToMany",
+            "model": "MensaDailyMenu",
+            "foreignKey": ""
+        },
+        "sections": {
+            "type": "hasAndBelongsToMany",
+            "model": "MensaSection",
+            "foreignKey": ""
+        }
     },
-    "sections": {
-      "type": "hasAndBelongsToMany",
-      "model": "MensaSection",
-      "foreignKey": ""
-    }
-  },
-  "acls": [],
-  "methods": []
+    "acls": [],
+    "methods": []
 }

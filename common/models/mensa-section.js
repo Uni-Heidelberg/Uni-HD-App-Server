@@ -1,3 +1,3 @@
-module.exports = function(MensaSection) {
+module.exports = function (MensaSection) {
 
 };

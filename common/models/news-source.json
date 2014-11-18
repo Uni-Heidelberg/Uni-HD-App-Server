@@ -1,32 +1,32 @@
 {
-  "name": "NewsSource",
-  "base": "PersistedModel",
-  "properties": {
-    "title": {
-      "type": "string",
-      "required": true
+    "name": "NewsSource",
+    "base": "PersistedModel",
+    "properties": {
+        "title": {
+            "type": "string",
+            "required": true
+        },
+        "url": {
+            "type": "string",
+            "required": true
+        },
+        "imageUrl": {
+            "type": "string"
+        }
     },
-    "url": {
-      "type": "string",
-      "required": true
+    "validations": [],
+    "relations": {
+        "items": {
+            "type": "hasMany",
+            "model": "NewsItem",
+            "foreignKey": "sourceId"
+        },
+        "category": {
+            "type": "belongsTo",
+            "model": "NewsCategory",
+            "foreignKey": ""
+        }
     },
-    "imageUrl": {
-      "type": "string"
-    }
-  },
-  "validations": [],
-  "relations": {
-    "items": {
-      "type": "hasMany",
-      "model": "NewsItem",
-      "foreignKey": "sourceId"
-    },
-    "category": {
-      "type": "belongsTo",
-      "model": "NewsCategory",
-      "foreignKey": ""
-    }
-  },
-  "acls": [],
-  "methods": []
+    "acls": [],
+    "methods": []
 }

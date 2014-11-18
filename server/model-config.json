@@ -1,38 +1,38 @@
 {
-  "_meta": {
-    "sources": [
-      "loopback/common/models",
-      "loopback/server/models",
-      "../common/models",
-      "./models"
-    ]
-  },
-  "NewsCategory": {
-    "dataSource": "appserver",
-    "public": true
-  },
-  "NewsSource": {
-    "dataSource": "appserver",
-    "public": true
-  },
-  "NewsItem": {
-    "dataSource": "appserver",
-    "public": true
-  },
-  "Mensa": {
-    "dataSource": "appserver",
-    "public": true
-  },
-  "MensaSection": {
-    "dataSource": "appserver",
-    "public": true
-  },
-  "MensaDailyMenu": {
-    "dataSource": "appserver",
-    "public": true
-  },
-  "MensaMeal": {
-    "dataSource": "appserver",
-    "public": true
-  }
+    "_meta": {
+        "sources": [
+            "loopback/common/models",
+            "loopback/server/models",
+            "../common/models",
+            "./models"
+        ]
+    },
+    "NewsCategory": {
+        "dataSource": "appserver",
+        "public": true
+    },
+    "NewsSource": {
+        "dataSource": "appserver",
+        "public": true
+    },
+    "NewsItem": {
+        "dataSource": "appserver",
+        "public": true
+    },
+    "Mensa": {
+        "dataSource": "appserver",
+        "public": true
+    },
+    "MensaSection": {
+        "dataSource": "appserver",
+        "public": true
+    },
+    "MensaDailyMenu": {
+        "dataSource": "appserver",
+        "public": true
+    },
+    "MensaMeal": {
+        "dataSource": "appserver",
+        "public": true
+    }
 }
