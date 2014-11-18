@@ -4,7 +4,7 @@
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box = "chrko/debian-base"
+  config.vm.box = "chrko/debian-web"
 
   config.vm.network "forwarded_port", guest: 3000, host: 3000
 
