@@ -9,10 +9,15 @@
     },
     "validations": [],
     "relations": {
-        "meals": {
-            "type": "hasAndBelongsToMany",
-            "model": "MensaMeal",
-            "foreignKey": ""
+        "mensa": {
+            "type": "belongsTo",
+            "model": "Mensa",
+            "foreignKey": "mensaId"
+        },
+        "menus": {
+            "type": "hasMany",
+            "model": "MensaDailyMenu",
+            "foreignKey": "sectionId"
         }
     },
     "acls": [],

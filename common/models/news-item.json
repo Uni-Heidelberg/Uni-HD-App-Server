@@ -12,7 +12,8 @@
         },
         "abstract": {
             "type": "string",
-            "required": true
+            "required": true,
+            "length": 2000
         },
         "thumbImageUrl": {
             "type": "string",
@@ -24,11 +25,11 @@
         },
         "urlHash": {
             "type": "string",
-            "length": 200,
+            "required": true,
             "index": {
                 "unique": true
             },
-            "required": true
+            "length": 200
         }
     },
     "validations": [],

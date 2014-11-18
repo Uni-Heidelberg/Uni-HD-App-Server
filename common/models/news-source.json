@@ -24,7 +24,7 @@
         "category": {
             "type": "belongsTo",
             "model": "NewsCategory",
-            "foreignKey": ""
+            "foreignKey": "categoryId"
         }
     },
     "acls": [],

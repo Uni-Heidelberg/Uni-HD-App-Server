@@ -16,12 +16,7 @@
         "sections": {
             "type": "hasMany",
             "model": "MensaSection",
-            "foreignKey": ""
-        },
-        "dailyMenus": {
-            "type": "hasMany",
-            "model": "MensaDailyMenu",
-            "foreignKey": ""
+            "foreignKey": "mensaId"
         }
     },
     "acls": [],

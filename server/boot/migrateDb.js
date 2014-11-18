@@ -6,6 +6,11 @@ module.exports = function (app) {
     var NewsSource = app.models.NewsSource;
     var NewsItem = app.models.NewsItem;
 
+    var Mensa = app.models.Mensa;
+    var MensaDailyMenu = app.models.MensaDailyMenu;
+    var MensaMeal = app.models.MensaMeal;
+    var MensaSection = app.models.MensaSection;
+
     var feedRead = require('feed-read');
     var crypto = require('crypto');
     var request = require('request');
@@ -31,20 +36,23 @@ module.exports = function (app) {
                         abstract: article.content,
                         url: article.link
                     };
-                    request.get(article.link, function (err, res) {
-                        if (err) {
-                            return;
-                        }
-                        itemData.url = res.request.uri.href;
-                        itemData.urlHash = crypto.createHash('sha1').update(res.request.uri.href).digest('hex');
-                        NewsItem.findOrCreate(
-                            {where: {urlHash: itemData.urlHash}},
-                            itemData,
-                            function (err, item) {
-                                //console.log(err);
-                            }
-                        );
-                    });
+                    request.get(article.link, (function (itemData) {
+                            return function (err, res) {
+                                if (err) {
+                                    return;
+                                }
+                                itemData.url = res.request.uri.href;
+                                itemData.urlHash = crypto.createHash('sha1').update(res.request.uri.href).digest('hex');
+                                NewsItem.findOrCreate(
+                                    {where: {urlHash: itemData.urlHash}},
+                                    itemData,
+                                    function (err, item) {
+                                        //console.log(err);
+                                    }
+                                );
+                            };
+                        })(itemData)
+                    );
                 }
             }
         );
@@ -85,6 +93,58 @@ module.exports = function (app) {
                 });
             }
         });
+
+        Mensa.create(
+            {
+                'title': 'Zentralmensa',
+                'location': {
+                    'lat': 11,
+                    'lng': 11
+                }
+            }, function (err, mensa) {
+                MensaSection.create(
+                    {
+                        'title': 'Ausgabe A',
+                        'mensa': mensa
+                    },
+                    function (err, section) {
+                        MensaDailyMenu.create(
+                            {
+                                'date': '2014-11-18',
+                                'section': section
+                            },
+                            function (err, dailyMenu) {
+                                dailyMenu.meals.create({
+                                    'title': 'Kartoffeln',
+                                    'price': 0.30
+                                }, function (err, meal) {
+                                });
+                            }
+                        );
+                        MensaMeal.create(
+                            {
+                                'title': 'Braten',
+                                'price': 1.30
+                            }
+                        );
+
+
+                        MensaDailyMenu.findById(1, function (err, menu) {
+                            if (!menu) {
+                                return;
+                            }
+                            MensaMeal.findById(2, function (err, meal) {
+                                if (!meal) {
+                                    return;
+                                }
+                                menu.meals.add(meal, function (err) {
+                                });
+                            });
+                        });
+                    }
+                );
+            }
+        );
     }
 
     db.isActual(function (err, actual) {
