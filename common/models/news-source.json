@@ -1,0 +1,32 @@
+{
+  "name": "NewsSource",
+  "base": "PersistedModel",
+  "properties": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "url": {
+      "type": "string",
+      "required": true
+    },
+    "imageUrl": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "items": {
+      "type": "hasMany",
+      "model": "NewsItem",
+      "foreignKey": ""
+    },
+    "category": {
+      "type": "belongsTo",
+      "model": "NewsCategory",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": []
+}

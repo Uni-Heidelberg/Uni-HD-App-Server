@@ -1,0 +1,21 @@
+{
+  "name": "NewsCategory",
+  "plural": "NewsCategories",
+  "base": "PersistedModel",
+  "properties": {
+    "title": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "sources": {
+      "type": "hasMany",
+      "model": "NewsSource",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": []
+}

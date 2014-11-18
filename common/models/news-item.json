@@ -1,0 +1,36 @@
+{
+  "name": "NewsItem",
+  "base": "PersistedModel",
+  "properties": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "date": {
+      "type": "date",
+      "required": true
+    },
+    "abstract": {
+      "type": "string",
+      "required": true
+    },
+    "thumbImageUrl": {
+      "type": "string",
+      "required": true
+    },
+    "url": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "source": {
+      "type": "belongsTo",
+      "model": "NewsSource",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": []
+}

@@ -16,7 +16,7 @@ make install
 cd
 git clone https://github.com/npm/npm.git
 cd npm
-git checkout v1.4.28
+git checkout v2.1.8
 ./configure
 make
 make install

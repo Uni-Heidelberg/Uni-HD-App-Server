@@ -1,2 +1,22 @@
 {
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ]
+  },
+  "NewsCategory": {
+    "dataSource": "appserver",
+    "public": true
+  },
+  "NewsSource": {
+    "dataSource": "appserver",
+    "public": true
+  },
+  "NewsItem": {
+    "dataSource": "appserver",
+    "public": true
+  }
 }
