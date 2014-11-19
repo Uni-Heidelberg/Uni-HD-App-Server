@@ -67,8 +67,7 @@ module.exports = function (agenda) {
                                                 .match(
                                                 /.*, ([0-9]{1,2})\.([0-9]{1,2})\.([0-9]{1,4})/
                                             );
-                                        var date =
-                                            rawDate[3] + '-' + rawDate[2] + '-' + rawDate[1] + ' 12:00:00';
+                                        var date = new Date(rawDate[3], rawDate[2] - 1, rawDate[1], 12, 0, 0);
 
                                         // Iteriere über jede Tabellen Zeile
                                         el.find('tr').each(function () {
@@ -137,11 +136,11 @@ module.exports = function (agenda) {
                                                             // Something like this necessary
                                                             // if mensa is changing something  already published
                                                             /*menu.meals.destroyAll(function (err) {
-                                                                if (err) {
-                                                                    console.log('Error removing all meals from menu');
-                                                                    console.log(err);
-                                                                }
-                                                            });*/
+                                                             if (err) {
+                                                             console.log('Error removing all meals from menu');
+                                                             console.log(err);
+                                                             }
+                                                             });*/
 
                                                             MensaMeal.findOrCreate(
                                                                 {'where': mealData},

@@ -6,6 +6,7 @@ Requirements
 
 * [node.js][1]
 * MySQL
+* mongodb
 
 Deployment
 ----------

@@ -12,7 +12,7 @@ module.exports = function (agenda) {
     agenda.define(
         'reloading news',
         function (job, done) {
-            console.log('Starting parsing news sources'),
+            console.log('Starting parsing news sources');
 
             NewsSource.find(function (err, sources) {
                 async.each(
@@ -28,7 +28,11 @@ module.exports = function (agenda) {
                                     articles,
                                     (function (source) {
                                         return function (article, callback) {
-                                            if (!article.published || article.published.getFullYear() < 2010) {
+                                            if (
+                                                !article.published || article.published.getFullYear() < 2010
+                                                || article.content.length < 5
+                                                || article.published.toString() === 'Invalid Date'
+                                            ) {
                                                 return;
                                             }
                                             if (article.link.indexOf('http://') === -1) {
