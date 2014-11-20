@@ -50,8 +50,8 @@ var agenda = new Agenda(
 require('./lib/jobs/news.js')(agenda);
 require('./lib/jobs/mensaParser.js')(agenda);
 
-agenda.every('day', 'reloading news');
-agenda.every('day', 'parse mensa content');
+agenda.every(app.get('news interval'), 'reloading news');
+agenda.every(app.get('mensa interval'), 'parse mensa content');
 
 agenda.start();
 
