@@ -5,6 +5,8 @@ var crypto = require('crypto');
 var request = require('request');
 var async = require('async');
 
+var md = require('html-md');
+
 var NewsSource = app.models.NewsSource;
 var NewsItem = app.models.NewsItem;
 
@@ -42,7 +44,7 @@ module.exports = function (agenda) {
                                                 sourceId: source.id,
                                                 title: article.title,
                                                 date: article.published,
-                                                abstract: article.content,
+                                                abstract: md(article.content),
                                                 url: article.link
                                             };
                                             request.get(
@@ -53,7 +55,11 @@ module.exports = function (agenda) {
                                                             return;
                                                         }
                                                         itemData.url = res.request.uri.href;
-                                                        itemData.urlHash = crypto.createHash('sha1').update(res.request.uri.href).digest('hex');
+                                                        itemData.urlHash =
+                                                            crypto
+                                                                .createHash('sha1')
+                                                                .update(res.request.uri.href)
+                                                                .digest('hex');
                                                         NewsItem.findOrCreate(
                                                             {where: {urlHash: itemData.urlHash}},
                                                             itemData,
@@ -61,6 +67,15 @@ module.exports = function (agenda) {
                                                                 if (err) {
                                                                     console.log(err);
                                                                 }
+                                                                item.title = itemData.title;
+                                                                item.date = itemData.date;
+                                                                item.abstract =
+                                                                    itemData
+                                                                        .abstract
+                                                                        .replace(/\\/, '')
+                                                                        .replace(/\\\./, '.');
+
+                                                                item.save();
                                                             }
                                                         );
                                                     };
