@@ -27,7 +27,7 @@
             "type": "string",
             "required": true,
             "index": {
-                "unique": true
+                "kind": "unique"
             },
             "length": 200
         }
