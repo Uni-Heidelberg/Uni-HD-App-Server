@@ -1,3 +1,5 @@
+require("clim")(console, true);
+
 var loopback = require('loopback');
 var boot = require('loopback-boot');
 
