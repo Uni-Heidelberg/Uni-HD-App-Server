@@ -10,7 +10,8 @@
     "properties": {
         "date": {
             "type": "date",
-            "required": true
+            "required": true,
+            "null": false
         }
     },
     "validations": [],

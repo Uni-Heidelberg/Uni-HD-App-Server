@@ -10,8 +10,9 @@
     "properties": {
         "title": {
             "type": "string",
+            "required": true,
             "length": 20,
-            "required": true
+            "null": false
         }
     },
     "validations": [],

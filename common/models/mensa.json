@@ -4,15 +4,18 @@
     "properties": {
         "title": {
             "type": "string",
-            "required": true
+            "required": true,
+            "null": false
         },
         "location": {
             "type": "geopoint",
-            "required": true
+            "required": true,
+            "null": false
         },
         "parsable": {
             "type": "boolean",
-            "default": 0
+            "default": false,
+            "null": false
         }
     },
     "validations": [],

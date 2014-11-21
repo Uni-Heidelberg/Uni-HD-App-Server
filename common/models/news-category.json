@@ -5,7 +5,8 @@
     "properties": {
         "title": {
             "type": "string",
-            "required": true
+            "required": true,
+            "null": false
         }
     },
     "validations": [],

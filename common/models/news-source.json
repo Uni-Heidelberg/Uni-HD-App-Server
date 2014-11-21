@@ -4,11 +4,13 @@
     "properties": {
         "title": {
             "type": "string",
-            "required": true
+            "required": true,
+            "null": false
         },
         "url": {
             "type": "string",
-            "required": true
+            "required": true,
+            "null": false
         },
         "imageUrl": {
             "type": "string"

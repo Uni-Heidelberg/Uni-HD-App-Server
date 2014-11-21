@@ -23,7 +23,11 @@ module.exports = function (agenda) {
             console.log('Starting parsing data for mensas...');
 
             // Suche alle Mensen
-            Mensa.find(function (err, mensas) {
+            Mensa.find({
+                "where": {
+                    "parsable": true
+                }
+            }, function (err, mensas) {
                 if (err) {
                     return;
                 }
@@ -39,9 +43,6 @@ module.exports = function (agenda) {
                         async.each(
                             mensas,
                             function (mensa, callback) {
-                                if (!mensa.parsable) {
-                                    return;
-                                }
                                 console.log('Parsing now data for ' + mensa.title);
 
                                 // Traversierung durch den HTML-Baum der Webseite
