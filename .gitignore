@@ -2,3 +2,4 @@
 .vagrant
 node_modules
 server/datasources.json
+server/config.local.json
