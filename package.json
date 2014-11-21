@@ -1,29 +1,30 @@
 {
-    "name": "appserver",
-    "version": "0.0.0",
-    "main": "server/server.js",
-    "scripts": {
-        "pretest": "jshint ."
-    },
-    "dependencies": {
-        "agenda": "^0.6.24",
-        "async": "^0.9.0",
-        "compression": "^1.0.3",
-        "errorhandler": "^1.1.1",
-        "feed-read": "0.0.1",
-        "jquery": "^2.1.1",
-        "jsdom": "^1.2.3",
-        "loopback": "^2.7.0",
-        "loopback-boot": "^2.3.1",
-        "loopback-connector-mysql": "^1.4.7",
-        "loopback-datasource-juggler": "^2.11.0",
-        "request": "^2.48.0",
-        "serve-favicon": "^2.0.1"
-    },
-    "optionalDependencies": {
-        "loopback-explorer": "^1.1.0"
-    },
-    "devDependencies": {
-        "jshint": "^2.5.6"
-    }
+  "name": "appserver",
+  "version": "0.0.0",
+  "main": "server/server.js",
+  "scripts": {
+    "pretest": "jshint ."
+  },
+  "dependencies": {
+    "agenda": "^0.6.24",
+    "async": "^0.9.0",
+    "compression": "^1.0.3",
+    "errorhandler": "^1.1.1",
+    "feed-read": "0.0.1",
+    "html-md": "^3.0.2",
+    "jquery": "^2.1.1",
+    "jsdom": "^1.2.3",
+    "loopback": "^2.7.0",
+    "loopback-boot": "^2.3.1",
+    "loopback-connector-mysql": "^1.4.7",
+    "loopback-datasource-juggler": "^2.11.0",
+    "request": "^2.48.0",
+    "serve-favicon": "^2.0.1"
+  },
+  "optionalDependencies": {
+    "loopback-explorer": "^1.1.0"
+  },
+  "devDependencies": {
+    "jshint": "^2.5.6"
+  }
 }
