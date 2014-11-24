@@ -31,6 +31,11 @@
             "required": true,
             "null": false,
             "dataType": "double"
+        },
+        "vegetarian": {
+            "type": "boolean",
+            "default": false,
+            "null": false
         }
     },
     "validations": [],

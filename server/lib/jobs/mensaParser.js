@@ -105,6 +105,9 @@ module.exports = function (agenda) {
                                                 }
                                             });
 
+                                            mealData.vegetarian = mealData.title.indexOf('veget.') > 0;
+                                            mealData.title = mealData.title.replace(/\ \(veget\.\)/, '');
+
                                             MensaSection.findOne(
                                                 {
                                                     'where': {
