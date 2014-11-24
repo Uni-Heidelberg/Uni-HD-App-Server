@@ -34,5 +34,9 @@
     "MensaMeal": {
         "dataSource": "appserver",
         "public": true
+    },
+    "ACL": {
+        "dataSource": "db",
+        "public": false
     }
 }

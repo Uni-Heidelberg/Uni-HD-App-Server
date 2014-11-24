@@ -7,5 +7,9 @@
         "password": "appserver",
         "name": "appserver",
         "connector": "mysql"
+    },
+    "db": {
+        "name": "db",
+        "connector": "memory"
     }
 }
