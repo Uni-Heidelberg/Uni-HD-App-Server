@@ -49,7 +49,8 @@ module.exports = function (app) {
             }
 
             Mensa.create({
-                'title': 'Mensa Im Neuenheimer Feld 304',
+                'title': 'Zentralmensa',
+                'parseTitle': 'Mensa Im Neuenheimer Feld 304',
                 'location': {
                     'lat': 49.41561,
                     'lng': 8.67072
@@ -73,7 +74,8 @@ module.exports = function (app) {
                 });
             });
             Mensa.create({
-                'title': 'zeughaus-Mensa im Marstall',
+                'title': 'zeughaus',
+                'parseTitle': 'zeughaus-Mensa im Marstall',
                 'location': {
                     'lat': 49.41299,
                     'lng': 8.70476
@@ -89,7 +91,8 @@ module.exports = function (app) {
                 });
             });
             Mensa.create({
-                'title': 'Triplex-Mensa am Uniplatz',
+                'title': 'Triplex-Mensa',
+                'parseTitle': 'Triplex-Mensa am Uniplatz',
                 'location': {
                     'lat': 49.41068,
                     'lng': 8.70576
@@ -118,7 +121,7 @@ module.exports = function (app) {
     db.isActual(function (err, actual) {
         if (!actual) {
             console.log('Database needs update, automigrating table structure from model...');
-            db.automigrate(function () {
+            db.autoupdate(function () {
                 generateSampleData();
             });
         } else {

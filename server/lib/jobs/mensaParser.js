@@ -43,11 +43,11 @@ module.exports = function (agenda) {
                         async.each(
                             mensas,
                             function (mensa, callback) {
-                                console.log('Parsing now data for ' + mensa.title);
+                                console.log('Parsing now data for ' + mensa.title + ' (' + mensa.parseTitle + ')');
 
                                 // Traversierung durch den HTML-Baum der Webseite
                                 // 1. Finde das Element, welches den Mensa Namen enthält
-                                $('h3.mensa-title:contains("' + mensa.title + '")')
+                                $('h3.mensa-title:contains("' + mensa.parseTitle + '")')
                                     // gehe zum Elternknoten
                                     .parent()
                                     // und finde das Kind mit den Tabellen und Überschriften

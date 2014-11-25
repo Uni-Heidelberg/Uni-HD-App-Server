@@ -16,6 +16,11 @@
             "type": "boolean",
             "default": false,
             "null": false
+        },
+        "parseTitle": {
+            "type": "string",
+            "required": true,
+            "null": false
         }
     },
     "validations": [],
