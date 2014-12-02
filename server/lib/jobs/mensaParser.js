@@ -116,9 +116,10 @@ module.exports = function (agenda) {
                                                     }
                                                 },
                                                 function (err, section) {
-                                                    if (err) {
+                                                    if (err || section === null) {
                                                         console.log('Error finding section');
                                                         console.log(err);
+                                                        console.log(section);
                                                         return;
                                                     }
 
@@ -130,9 +131,10 @@ module.exports = function (agenda) {
                                                         {'where': dailyMenuData},
                                                         dailyMenuData,
                                                         function (err, menu) {
-                                                            if (err) {
+                                                            if (err || menu === null) {
                                                                 console.log('Error finding or creating daily menu');
                                                                 console.log(err);
+                                                                console.log(menu);
                                                                 return;
                                                             }
                                                             delete mealData.sectionTitle;
@@ -150,9 +152,10 @@ module.exports = function (agenda) {
                                                                 {'where': mealData},
                                                                 mealData,
                                                                 function (err, meal) {
-                                                                    if (err) {
+                                                                    if (err || meal === null) {
                                                                         console.log('Error finding or creating meal');
                                                                         console.log(err);
+                                                                        console.log(meal);
                                                                         return;
                                                                     }
                                                                     menu.meals.add(meal, function (err) {
