@@ -3,7 +3,7 @@
     "base": "PersistedModel",
     "indexes": {
         "uniqueIndex": {
-            "columns": "title, mensaId",
+            "columns": "title, canteenId",
             "kind": "unique"
         }
     },
@@ -17,10 +17,10 @@
     },
     "validations": [],
     "relations": {
-        "mensa": {
+        "canteen": {
             "type": "belongsTo",
             "model": "Canteen",
-            "foreignKey": "mensaId"
+            "foreignKey": "canteenId"
         },
         "menus": {
             "type": "hasMany",

@@ -56,21 +56,21 @@ module.exports = function (app) {
                     'lng': 8.67072
                 },
                 'parsable': true
-            }, function (err, mensa) {
+            }, function (err, canteen) {
                 if (err)
                     throw err;
 
                 CanteenSection.create({
                     'title': 'A+B',
-                    'mensa': mensa
+                    'canteen': canteen
                 });
                 CanteenSection.create({
                     'title': 'D',
-                    'mensa': mensa
+                    'canteen': canteen
                 });
                 CanteenSection.create({
                     'title': 'E',
-                    'mensa': mensa
+                    'canteen': canteen
                 });
             });
             Canteen.create({
@@ -81,13 +81,13 @@ module.exports = function (app) {
                     'lng': 8.70476
                 },
                 'parsable': true
-            }, function (err, mensa) {
+            }, function (err, canteen) {
                 if (err)
                     throw err;
 
                 CanteenSection.create({
                     'title': 'Buffet',
-                    'mensa': mensa
+                    'canteen': canteen
                 });
             });
             Canteen.create({
@@ -98,21 +98,21 @@ module.exports = function (app) {
                     'lng': 8.70576
                 },
                 'parsable': true
-            }, function (err, mensa) {
+            }, function (err, canteen) {
                 if (err)
                     throw err;
 
                 CanteenSection.create({
                     'title': 'A',
-                    'mensa': mensa
+                    'canteen': canteen
                 });
                 CanteenSection.create({
                     'title': 'B',
-                    'mensa': mensa
+                    'canteen': canteen
                 });
                 CanteenSection.create({
                     'title': 'C',
-                    'mensa': mensa
+                    'canteen': canteen
                 });
             });
         });

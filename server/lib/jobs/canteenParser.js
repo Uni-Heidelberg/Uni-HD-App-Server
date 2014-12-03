@@ -47,7 +47,7 @@ module.exports = function (agenda) {
 
                                 // Traversierung durch den HTML-Baum der Webseite
                                 // 1. Finde das Element, welches den Canteen Namen enthält
-                                $('h3.canteen-title:contains("' + canteen.parseTitle + '")')
+                                $('h3.mensa-title:contains("' + canteen.parseTitle + '")')
                                     // gehe zum Elternknoten
                                     .parent()
                                     // und finde das Kind mit den Tabellen und Überschriften
@@ -75,7 +75,7 @@ module.exports = function (agenda) {
                                             var el = $(this);
 
                                             // Überspringe Header
-                                            if (el.hasClass('canteen-header')) {
+                                            if (el.hasClass('mensa-header')) {
                                                 return;
                                             }
 
@@ -116,10 +116,14 @@ module.exports = function (agenda) {
                                                     }
                                                 },
                                                 function (err, section) {
-                                                    if (err || section === null) {
+                                                    if (err) {
                                                         console.log('Error finding section');
                                                         console.log(err);
-                                                        console.log(section);
+                                                        return;
+                                                    }
+                                                    if (section === null) {
+                                                        console.log('No section found');
+                                                        console.log(mealData);
                                                         return;
                                                     }
 
