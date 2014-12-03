@@ -39,6 +39,41 @@
             "principalType": "ROLE",
             "principalId": "$everyone",
             "permission": "DENY"
+        },
+        {
+            "accessType": "EXECUTE",
+            "principalType": "ROLE",
+            "principalId": "$everyone",
+            "permission": "ALLOW",
+            "property": "__get__meals"
+        },
+        {
+            "accessType": "EXECUTE",
+            "principalType": "ROLE",
+            "principalId": "$everyone",
+            "permission": "ALLOW",
+            "property": "__findById__meals"
+        },
+        {
+            "accessType": "EXECUTE",
+            "principalType": "ROLE",
+            "principalId": "$everyone",
+            "permission": "ALLOW",
+            "property": "__count__meals"
+        },
+        {
+            "accessType": "EXECUTE",
+            "principalType": "ROLE",
+            "principalId": "$everyone",
+            "permission": "ALLOW",
+            "property": "__exists__meals"
+        },
+        {
+            "accessType": "EXECUTE",
+            "principalType": "ROLE",
+            "principalId": "$everyone",
+            "permission": "ALLOW",
+            "property": "__get__section"
         }
     ],
     "methods": []
