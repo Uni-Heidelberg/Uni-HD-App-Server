@@ -3,7 +3,7 @@ module.exports = function (app) {
     var db = app.datasources.appserver;
 
     var NewsCategory = app.models.NewsCategory;
-    var NewsSource = app.models.NewsSource;
+    var NewsEventSource = app.models.NewsEventSource;
 
     var Canteen = app.models.Canteen;
     var CanteenSection = app.models.CanteenSection;
@@ -16,29 +16,79 @@ module.exports = function (app) {
 
             console.log('No data in database, generating sample data...');
             NewsCategory.create({
-                title: 'Universität Heidelberg'
+                title: 'Universität Heidelberg',
+                imagePath: 'something'
             }, function (err, category) {
-                NewsSource.create({
-                    title: 'Pressestelle der Universität Heidelberg',
-                    url: 'http://www.uni-heidelberg.de/presse/rss.xml',
-                    categoryId: category.id
-                }, function (err, source) {
+                if (err || category === null) {
+                    throw err;
+                }
+                NewsCategory.create({
+                    title: "Pressestelle der Universität Heidelberg",
+                    imagePath: 'something',
+                    parent: category
+                }, function (err, category) {
+                    if (err || category === null) {
+                        throw err;
+                    }
+                    NewsEventSource.create({
+                        type: 'feed',
+                        comment: 'Feed der Pressestelle der Universität Heidelberg',
+                        url: 'http://www.uni-heidelberg.de/presse/rss.xml',
+                        category: category
+                    }, function (err, source) {
+                        if (err || source === null) {
+                            throw err;
+                        }
+                    });
                 });
             });
+
             NewsCategory.create({
-                title: 'Physik'
+                title: 'Physik',
+                imagePath: 'something'
             }, function (err, category) {
-                NewsSource.create({
+                if (err || category === null) {
+                    throw err;
+                }
+
+                NewsCategory.create({
                     title: 'Fakultät für Physik und Astronomie',
-                    url: 'http://www.physik.uni-heidelberg.de/aktuelles/rss/rss.xml',
-                    categoryId: category.id
-                }, function (err, source) {
+                    imagePath: 'something',
+                    parent: category
+                }, function (err, category) {
+                    if (err || category === null) {
+                        throw err;
+                    }
+                    NewsEventSource.create({
+                        type: 'feed',
+                        comment: 'Feed der Fakultät für Physik und Astronomie',
+                        url: 'http://www.physik.uni-heidelberg.de/aktuelles/rss/rss.xml',
+                        category: category
+                    }, function (err, source) {
+                        if (err || source === null) {
+                            throw err;
+                        }
+                    });
                 });
-                NewsSource.create({
+
+                NewsCategory.create({
                     title: 'Kirchhoff Institut für Physik',
-                    url: 'http://www.kip.uni-heidelberg.de/rss/rss.xml',
-                    categoryId: category.id
-                }, function (err, source) {
+                    imagePath: 'something',
+                    parent: category
+                }, function (err, category) {
+                    if (err || category === null) {
+                        throw err;
+                    }
+                    NewsEventSource.create({
+                        type: 'feed',
+                        comment: 'Feed des Kirchhoff Instituts für Physik',
+                        url: 'http://www.kip.uni-heidelberg.de/rss/rss.xml',
+                        category: category
+                    }, function (err, source) {
+                        if (err || source === null) {
+                            throw err;
+                        }
+                    });
                 });
             });
         });

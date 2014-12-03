@@ -1,0 +1,15 @@
+{
+    "name": "EventItem",
+    "base": "NewsItem",
+    "properties": {},
+    "validations": [],
+    "relations": {
+        "speaker": {
+            "type": "belongsTo",
+            "model": "Speaker",
+            "foreignKey": "speakerId"
+        }
+    },
+    "acls": [],
+    "methods": []
+}

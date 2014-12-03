@@ -49,10 +49,10 @@ var agenda = new Agenda(
     }
 );
 
-require('./lib/jobs/news.js')(agenda);
-require('./lib/jobs/canteenParser.js')(agenda);
+require('./lib/jobs/feedParser')(agenda);
+require('./lib/jobs/canteenParser')(agenda);
 
-agenda.every(app.get('news interval'), 'reloading news');
+agenda.every(app.get('feed interval'), 'parse feeds');
 agenda.every(app.get('canteen interval'), 'parse canteen content');
 
 agenda.start();
@@ -61,3 +61,4 @@ agenda.start();
 if (require.main === module) {
     app.start();
 }
+

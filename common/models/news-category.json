@@ -7,29 +7,31 @@
             "type": "string",
             "required": true,
             "null": false
+        },
+        "imagePath": {
+            "type": "string",
+            "required": true,
+            "null": false
         }
     },
     "validations": [],
     "relations": {
+        "children": {
+            "type": "hasMany",
+            "model": "NewsCategory",
+            "foreignKey": "parentId"
+        },
+        "parent": {
+            "type": "belongsTo",
+            "model": "NewsCategory",
+            "foreignKey": "parentId"
+        },
         "sources": {
             "type": "hasMany",
-            "model": "NewsSource",
+            "model": "NewsEventSource",
             "foreignKey": "categoryId"
         }
     },
-    "acls": [
-        {
-            "accessType": "WRITE",
-            "principalType": "ROLE",
-            "principalId": "$everyone",
-            "permission": "DENY"
-        },
-        {
-            "accessType": "EXECUTE",
-            "principalType": "ROLE",
-            "principalId": "$everyone",
-            "permission": "DENY"
-        }
-    ],
+    "acls": [],
     "methods": []
 }

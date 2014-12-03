@@ -18,9 +18,8 @@
             "null": false,
             "length": 2000
         },
-        "thumbImageUrl": {
-            "type": "string",
-            "required": false
+        "imagePath": {
+            "type": "string"
         },
         "url": {
             "type": "string",
@@ -41,23 +40,10 @@
     "relations": {
         "source": {
             "type": "belongsTo",
-            "model": "NewsSource",
+            "model": "NewsEventSource",
             "foreignKey": "sourceId"
         }
     },
-    "acls": [
-        {
-            "accessType": "WRITE",
-            "principalType": "ROLE",
-            "principalId": "$everyone",
-            "permission": "DENY"
-        },
-        {
-            "accessType": "EXECUTE",
-            "principalType": "ROLE",
-            "principalId": "$everyone",
-            "permission": "DENY"
-        }
-    ],
+    "acls": [],
     "methods": []
 }

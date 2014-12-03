@@ -1,0 +1,28 @@
+{
+    "name": "NewsEventSource",
+    "base": "PersistedModel",
+    "properties": {
+        "type": {
+            "type": "string",
+            "required": true
+        },
+        "url": {
+            "type": "string",
+            "required": true
+        },
+        "comment": {
+            "type": "string",
+            "required": true
+        }
+    },
+    "validations": [],
+    "relations": {
+        "category": {
+            "type": "belongsTo",
+            "model": "NewsCategory",
+            "foreignKey": "categoryId"
+        }
+    },
+    "acls": [],
+    "methods": []
+}

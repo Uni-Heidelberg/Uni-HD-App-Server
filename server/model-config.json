@@ -7,17 +7,9 @@
             "./models"
         ]
     },
-    "NewsCategory": {
-        "dataSource": "appserver",
-        "public": true
-    },
-    "NewsSource": {
-        "dataSource": "appserver",
-        "public": true
-    },
-    "NewsItem": {
-        "dataSource": "appserver",
-        "public": true
+    "ACL": {
+        "dataSource": "db",
+        "public": false
     },
     "Canteen": {
         "dataSource": "appserver",
@@ -35,8 +27,24 @@
         "dataSource": "appserver",
         "public": true
     },
-    "ACL": {
-        "dataSource": "db",
-        "public": false
+    "NewsCategory": {
+        "dataSource": "appserver",
+        "public": true
+    },
+    "NewsEventSource": {
+        "dataSource": "appserver",
+        "public": true
+    },
+    "NewsItem": {
+        "dataSource": "appserver",
+        "public": true
+    },
+    "EventItem": {
+        "dataSource": "appserver",
+        "public": true
+    },
+    "Speaker": {
+        "dataSource": "appserver",
+        "public": true
     }
 }

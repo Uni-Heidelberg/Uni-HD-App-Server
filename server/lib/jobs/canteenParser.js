@@ -3,7 +3,7 @@
  * @type {exports}
  */
 
-var app = require('../../server.js');
+var app = require('../../server');
 
 var jsdom = require('jsdom');
 var jQuery = require('jquery');
