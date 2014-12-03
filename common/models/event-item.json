@@ -1,7 +1,18 @@
 {
     "name": "EventItem",
     "base": "NewsItem",
-    "properties": {},
+    "properties": {
+        "abstract": {
+            "type": "string",
+            "length": 2000
+        },
+        "building": {
+            "type": "string"
+        },
+        "room": {
+            "type": "string"
+        }
+    },
     "validations": [],
     "relations": {
         "speaker": {

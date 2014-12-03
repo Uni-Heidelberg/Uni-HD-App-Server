@@ -7,8 +7,23 @@
             "./models"
         ]
     },
+    "User": {
+        "dataSource": "appserver"
+    },
+    "AccessToken": {
+        "dataSource": "appserver",
+        "public": false
+    },
     "ACL": {
-        "dataSource": "db",
+        "dataSource": "appserver",
+        "public": false
+    },
+    "RoleMapping": {
+        "dataSource": "appserver",
+        "public": false
+    },
+    "Role": {
+        "dataSource": "appserver",
         "public": false
     },
     "Canteen": {

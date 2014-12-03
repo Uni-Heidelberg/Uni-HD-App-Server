@@ -51,9 +51,11 @@ var agenda = new Agenda(
 
 require('./lib/jobs/feedParser')(agenda);
 require('./lib/jobs/canteenParser')(agenda);
+require('./lib/jobs/hephystoParser')(agenda);
 
 agenda.every(app.get('feed interval'), 'parse feeds');
 agenda.every(app.get('canteen interval'), 'parse canteen content');
+agenda.every(app.get('hephysto interval'), 'parse hephysto');
 
 agenda.start();
 

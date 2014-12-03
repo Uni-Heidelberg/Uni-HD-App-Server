@@ -8,6 +8,10 @@ module.exports = function (app) {
     var Canteen = app.models.Canteen;
     var CanteenSection = app.models.CanteenSection;
 
+    var User = app.models.User;
+    var Role = app.models.Role;
+    var RoleMapping = app.models.RoleMapping;
+
     var generateSampleData = function () {
         NewsCategory.count(function (err, count) {
             if (err || count !== 0) {
@@ -83,6 +87,26 @@ module.exports = function (app) {
                         type: 'feed',
                         comment: 'Feed des Kirchhoff Instituts für Physik',
                         url: 'http://www.kip.uni-heidelberg.de/rss/rss.xml',
+                        category: category
+                    }, function (err, source) {
+                        if (err || source === null) {
+                            throw err;
+                        }
+                    });
+                });
+
+                NewsCategory.create({
+                    title: 'Kolloquien',
+                    imagePath: 'something',
+                    parent: category
+                }, function (err, category) {
+                    if (err || category === null) {
+                        throw err;
+                    }
+                    NewsEventSource.create({
+                        type: 'hephysto',
+                        comment: 'Physikalisches Kolloquium (hephysto)',
+                        url: 'http://www.physik.uni-heidelberg.de/hephysto/tools/seminarinfo.php?id=7',
                         category: category
                     }, function (err, source) {
                         if (err || source === null) {
@@ -166,7 +190,45 @@ module.exports = function (app) {
                 });
             });
         });
+
+        User.count(function (err, count) {
+            if (err || count !== 0) {
+                return;
+            }
+
+            User.create(
+                {
+                    username: 'admin',
+                    email: 'admin@c9n.de',
+                    password: 'test'
+                },
+                function (err, user) {
+                    if (err) return cb(err);
+
+                    //create the admin role
+                    Role.create({
+                        name: 'admin'
+                    }, function (err, role) {
+                        if (err) {
+                            throw err;
+                        }
+
+                        //make bob an admin
+                        role.principals.create({
+                            principalType: RoleMapping.USER,
+                            principalId: user.id
+                        }, function (err, principal) {
+                            if (err) {
+                                throw err;
+                            }
+                            console.log(principal);
+                        });
+                    });
+                }
+            );
+        });
     };
+
 
     db.isActual(function (err, actual) {
         if (!actual) {
