@@ -19,19 +19,19 @@
         "dataSource": "appserver",
         "public": true
     },
-    "Mensa": {
+    "Canteen": {
         "dataSource": "appserver",
         "public": true
     },
-    "MensaSection": {
+    "CanteenSection": {
         "dataSource": "appserver",
         "public": true
     },
-    "MensaDailyMenu": {
+    "CanteenDailyMenu": {
         "dataSource": "appserver",
         "public": true
     },
-    "MensaMeal": {
+    "CanteenMeal": {
         "dataSource": "appserver",
         "public": true
     },

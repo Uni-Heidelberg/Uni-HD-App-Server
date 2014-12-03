@@ -1,5 +1,5 @@
 {
-    "name": "MensaMeal",
+    "name": "CanteenMeal",
     "base": "PersistedModel",
     "indexes": {
         "uniqueIndex": {
@@ -42,7 +42,7 @@
     "relations": {
         "menus": {
             "type": "hasAndBelongsToMany",
-            "model": "MensaDailyMenu",
+            "model": "CanteenDailyMenu",
             "foreignKey": "menuId"
         }
     },

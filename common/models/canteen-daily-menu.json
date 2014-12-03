@@ -1,34 +1,30 @@
 {
-    "name": "Mensa",
+    "name": "CanteenDailyMenu",
     "base": "PersistedModel",
+    "indexes": {
+        "uniqueIndex": {
+            "columns": "date, sectionId",
+            "kind": "unique"
+        }
+    },
     "properties": {
-        "title": {
-            "type": "string",
-            "required": true,
-            "null": false
-        },
-        "location": {
-            "type": "geopoint",
-            "required": true,
-            "null": false
-        },
-        "parsable": {
-            "type": "boolean",
-            "default": false,
-            "null": false
-        },
-        "parseTitle": {
-            "type": "string",
+        "date": {
+            "type": "date",
             "required": true,
             "null": false
         }
     },
     "validations": [],
     "relations": {
-        "sections": {
-            "type": "hasMany",
-            "model": "MensaSection",
-            "foreignKey": "mensaId"
+        "section": {
+            "type": "belongsTo",
+            "model": "CanteenSection",
+            "foreignKey": "sectionId"
+        },
+        "meals": {
+            "type": "hasAndBelongsToMany",
+            "model": "CanteenMeal",
+            "foreignKey": "mealId"
         }
     },
     "acls": [

@@ -5,8 +5,8 @@ module.exports = function (app) {
     var NewsCategory = app.models.NewsCategory;
     var NewsSource = app.models.NewsSource;
 
-    var Mensa = app.models.Mensa;
-    var MensaSection = app.models.MensaSection;
+    var Canteen = app.models.Canteen;
+    var CanteenSection = app.models.CanteenSection;
 
     var generateSampleData = function () {
         NewsCategory.count(function (err, count) {
@@ -43,12 +43,12 @@ module.exports = function (app) {
             });
         });
 
-        Mensa.count(function (err, count) {
+        Canteen.count(function (err, count) {
             if (err || count !== 0) {
                 return;
             }
 
-            Mensa.create({
+            Canteen.create({
                 'title': 'Zentralmensa',
                 'parseTitle': 'Mensa Im Neuenheimer Feld 304',
                 'location': {
@@ -60,20 +60,20 @@ module.exports = function (app) {
                 if (err)
                     throw err;
 
-                MensaSection.create({
+                CanteenSection.create({
                     'title': 'A+B',
                     'mensa': mensa
                 });
-                MensaSection.create({
+                CanteenSection.create({
                     'title': 'D',
                     'mensa': mensa
                 });
-                MensaSection.create({
+                CanteenSection.create({
                     'title': 'E',
                     'mensa': mensa
                 });
             });
-            Mensa.create({
+            Canteen.create({
                 'title': 'zeughaus',
                 'parseTitle': 'zeughaus-Mensa im Marstall',
                 'location': {
@@ -85,12 +85,12 @@ module.exports = function (app) {
                 if (err)
                     throw err;
 
-                MensaSection.create({
+                CanteenSection.create({
                     'title': 'Buffet',
                     'mensa': mensa
                 });
             });
-            Mensa.create({
+            Canteen.create({
                 'title': 'Triplex-Mensa',
                 'parseTitle': 'Triplex-Mensa am Uniplatz',
                 'location': {
@@ -102,15 +102,15 @@ module.exports = function (app) {
                 if (err)
                     throw err;
 
-                MensaSection.create({
+                CanteenSection.create({
                     'title': 'A',
                     'mensa': mensa
                 });
-                MensaSection.create({
+                CanteenSection.create({
                     'title': 'B',
                     'mensa': mensa
                 });
-                MensaSection.create({
+                CanteenSection.create({
                     'title': 'C',
                     'mensa': mensa
                 });

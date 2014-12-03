@@ -50,10 +50,10 @@ var agenda = new Agenda(
 );
 
 require('./lib/jobs/news.js')(agenda);
-require('./lib/jobs/mensaParser.js')(agenda);
+require('./lib/jobs/canteenParser.js')(agenda);
 
 agenda.every(app.get('news interval'), 'reloading news');
-agenda.every(app.get('mensa interval'), 'parse mensa content');
+agenda.every(app.get('canteen interval'), 'parse canteen content');
 
 agenda.start();
 

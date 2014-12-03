@@ -10,24 +10,24 @@ var jQuery = require('jquery');
 var async = require('async');
 
 // Importieren der Module in den lokalen Namensraum
-var Mensa = app.models.Mensa;
-var MensaDailyMenu = app.models.MensaDailyMenu;
-var MensaMeal = app.models.MensaMeal;
-var MensaSection = app.models.MensaSection;
+var Canteen = app.models.Canteen;
+var CanteenDailyMenu = app.models.CanteenDailyMenu;
+var CanteenMeal = app.models.CanteenMeal;
+var CanteenSection = app.models.CanteenSection;
 
 
 module.exports = function (agenda) {
     agenda.define(
-        'parse mensa content',
+        'parse canteen content',
         function (job, done) {
-            console.log('Starting parsing data for mensas...');
+            console.log('Starting parsing data for canteens...');
 
             // Suche alle Mensen
-            Mensa.find({
+            Canteen.find({
                 "where": {
                     "parsable": true
                 }
-            }, function (err, mensas) {
+            }, function (err, canteens) {
                 if (err) {
                     return;
                 }
@@ -39,15 +39,15 @@ module.exports = function (agenda) {
                         // Mache aus einfach DOM jQuery
                         var $ = jQuery(window);
 
-                        // Laufe über jede mensa
+                        // Laufe über jede canteen
                         async.each(
-                            mensas,
-                            function (mensa, callback) {
-                                console.log('Parsing now data for ' + mensa.title + ' (' + mensa.parseTitle + ')');
+                            canteens,
+                            function (canteen, callback) {
+                                console.log('Parsing now data for ' + canteen.title + ' (' + canteen.parseTitle + ')');
 
                                 // Traversierung durch den HTML-Baum der Webseite
-                                // 1. Finde das Element, welches den Mensa Namen enthält
-                                $('h3.mensa-title:contains("' + mensa.parseTitle + '")')
+                                // 1. Finde das Element, welches den Canteen Namen enthält
+                                $('h3.canteen-title:contains("' + canteen.parseTitle + '")')
                                     // gehe zum Elternknoten
                                     .parent()
                                     // und finde das Kind mit den Tabellen und Überschriften
@@ -75,7 +75,7 @@ module.exports = function (agenda) {
                                             var el = $(this);
 
                                             // Überspringe Header
-                                            if (el.hasClass('mensa-header')) {
+                                            if (el.hasClass('canteen-header')) {
                                                 return;
                                             }
 
@@ -108,10 +108,10 @@ module.exports = function (agenda) {
                                             mealData.vegetarian = mealData.title.indexOf('veget.') > 0;
                                             mealData.title = mealData.title.replace(/\ \(veget\.\)/, '');
 
-                                            MensaSection.findOne(
+                                            CanteenSection.findOne(
                                                 {
                                                     'where': {
-                                                        'mensaId': mensa.id,
+                                                        'canteenId': canteen.id,
                                                         'title': mealData.sectionTitle
                                                     }
                                                 },
@@ -127,7 +127,7 @@ module.exports = function (agenda) {
                                                         'date': date,
                                                         'sectionId': section.id
                                                     };
-                                                    MensaDailyMenu.findOrCreate(
+                                                    CanteenDailyMenu.findOrCreate(
                                                         {'where': dailyMenuData},
                                                         dailyMenuData,
                                                         function (err, menu) {
@@ -140,7 +140,7 @@ module.exports = function (agenda) {
                                                             delete mealData.sectionTitle;
 
                                                             // Something like this necessary
-                                                            // if mensa is changing something  already published
+                                                            // if canteen is changing something  already published
                                                             /*menu.meals.destroyAll(function (err) {
                                                              if (err) {
                                                              console.log('Error removing all meals from menu');
@@ -148,7 +148,7 @@ module.exports = function (agenda) {
                                                              }
                                                              });*/
 
-                                                            MensaMeal.findOrCreate(
+                                                            CanteenMeal.findOrCreate(
                                                                 {'where': mealData},
                                                                 mealData,
                                                                 function (err, meal) {
