@@ -17,6 +17,7 @@
     "jsdom": "^1.2.3",
     "loopback": "^2.7.0",
     "loopback-boot": "^2.3.1",
+    "loopback-component-storage": "^1.0.6",
     "loopback-connector-mysql": "^1.4.7",
     "loopback-datasource-juggler": "^2.11.0",
     "request": "^2.48.0",
