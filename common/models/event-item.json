@@ -11,16 +11,22 @@
         },
         "room": {
             "type": "string"
+        },
+        "speakerName": {
+            "type": "string"
+        },
+        "speakerAffiliation": {
+            "type": "string"
+        },
+        "speakerEmail": {
+            "type": "string"
+        },
+        "speakerUrl": {
+            "type": "string"
         }
     },
     "validations": [],
-    "relations": {
-        "speaker": {
-            "type": "belongsTo",
-            "model": "Speaker",
-            "foreignKey": "speakerId"
-        }
-    },
+    "relations": {},
     "acls": [
         {
             "accessType": "WRITE",

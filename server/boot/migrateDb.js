@@ -36,7 +36,7 @@ module.exports = function (app) {
                     }
                     NewsEventSource.create({
                         type: 'feed',
-                        comment: 'Feed der Pressestelle der Universität Heidelberg',
+                        name: 'Feed der Pressestelle der Universität Heidelberg',
                         url: 'http://www.uni-heidelberg.de/presse/rss.xml',
                         category: category
                     }, function (err, source) {
@@ -65,7 +65,7 @@ module.exports = function (app) {
                     }
                     NewsEventSource.create({
                         type: 'feed',
-                        comment: 'Feed der Fakultät für Physik und Astronomie',
+                        name: 'Feed der Fakultät für Physik und Astronomie',
                         url: 'http://www.physik.uni-heidelberg.de/aktuelles/rss/rss.xml',
                         category: category
                     }, function (err, source) {
@@ -85,7 +85,7 @@ module.exports = function (app) {
                     }
                     NewsEventSource.create({
                         type: 'feed',
-                        comment: 'Feed des Kirchhoff Instituts für Physik',
+                        name: 'Feed des Kirchhoff Instituts für Physik',
                         url: 'http://www.kip.uni-heidelberg.de/rss/rss.xml',
                         category: category
                     }, function (err, source) {
@@ -103,16 +103,6 @@ module.exports = function (app) {
                     if (err || category === null) {
                         throw err;
                     }
-                    NewsEventSource.create({
-                        type: 'hephysto',
-                        comment: 'Physikalisches Kolloquium (hephysto)',
-                        url: 'http://www.physik.uni-heidelberg.de/hephysto/tools/seminarinfo.php?id=7',
-                        category: category
-                    }, function (err, source) {
-                        if (err || source === null) {
-                            throw err;
-                        }
-                    });
                 });
             });
         });

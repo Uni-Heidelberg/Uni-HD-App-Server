@@ -35,7 +35,7 @@ module.exports = function (NewsCategory) {
             isStatic: false,
             http: {
                 verb: 'get',
-                path: '/items'
+                path: '/newsItems'
             }
         }
     );
@@ -75,7 +75,7 @@ module.exports = function (NewsCategory) {
             returns: {arg: 'events', type: 'array', root: true},
             http: {
                 verb: 'get',
-                path: '/events'
+                path: '/eventItems'
             }
         }
     );

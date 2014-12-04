@@ -58,10 +58,6 @@
         "dataSource": "appserver",
         "public": true
     },
-    "Speaker": {
-        "dataSource": "appserver",
-        "public": true
-    },
     "Files": {
         "dataSource": "storage",
         "public": true

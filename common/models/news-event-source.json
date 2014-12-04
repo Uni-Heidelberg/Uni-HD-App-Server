@@ -2,6 +2,10 @@
     "name": "NewsEventSource",
     "base": "PersistedModel",
     "properties": {
+        "name": {
+            "type": "string",
+            "required": true
+        },
         "type": {
             "type": "string",
             "required": true
@@ -10,17 +14,27 @@
             "type": "string",
             "required": true
         },
-        "comment": {
-            "type": "string",
-            "required": true
+        "options": {
+            "type": "object"
         }
     },
+    "hidden": ["options"],
     "validations": [],
     "relations": {
         "category": {
             "type": "belongsTo",
             "model": "NewsCategory",
             "foreignKey": "categoryId"
+        },
+        "eventItems": {
+            "type": "hasMany",
+            "model": "EventItem",
+            "foreignKey": "sourceId"
+        },
+        "newsItems": {
+            "type": "hasMany",
+            "model": "NewsItem",
+            "foreignKey": "sourceId"
         }
     },
     "acls": [
@@ -42,6 +56,48 @@
             "principalId": "$everyone",
             "permission": "ALLOW",
             "property": "__get__category"
+        },
+        {
+            "accessType": "EXECUTE",
+            "principalType": "ROLE",
+            "principalId": "$everyone",
+            "permission": "ALLOW",
+            "property": "__get__eventItems"
+        },
+        {
+            "accessType": "EXECUTE",
+            "principalType": "ROLE",
+            "principalId": "$everyone",
+            "permission": "ALLOW",
+            "property": "__findById__eventItems"
+        },
+        {
+            "accessType": "EXECUTE",
+            "principalType": "ROLE",
+            "principalId": "$everyone",
+            "permission": "ALLOW",
+            "property": "__count__eventItems"
+        },
+        {
+            "accessType": "EXECUTE",
+            "principalType": "ROLE",
+            "principalId": "$everyone",
+            "permission": "ALLOW",
+            "property": "__get__newsItems"
+        },
+        {
+            "accessType": "EXECUTE",
+            "principalType": "ROLE",
+            "principalId": "$everyone",
+            "permission": "ALLOW",
+            "property": "__findById__newsItems"
+        },
+        {
+            "accessType": "EXECUTE",
+            "principalType": "ROLE",
+            "principalId": "$everyone",
+            "permission": "ALLOW",
+            "property": "__count__newsItems"
         }
     ],
     "methods": []

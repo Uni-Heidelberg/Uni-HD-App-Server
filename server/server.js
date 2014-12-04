@@ -49,15 +49,37 @@ var agenda = new Agenda(
     }
 );
 
-require('./lib/jobs/feedParser')(agenda);
-require('./lib/jobs/canteenParser')(agenda);
-require('./lib/jobs/hephystoParser')(agenda);
+jobTypes = [
+    'canteenParser',
+    'feedParser',
+    'hephystoParser',
+    'reloadHephystoSources'
+];
+
+jobTypes.forEach(function(type) {
+    require('./lib/jobs/' + type)(agenda);
+});
 
 agenda.every(app.get('feed interval'), 'parse feeds');
 agenda.every(app.get('canteen interval'), 'parse canteen content');
 agenda.every(app.get('hephysto interval'), 'parse hephysto');
 
+agenda.now('reload hephysto sources', {categoryId: 5});
+
 agenda.start();
+
+agenda.purge(function(err, numRemoved) {
+    console.log(numRemoved);
+});
+
+function graceful() {
+    agenda.stop(function() {
+        process.exit(0);
+    });
+}
+
+process.on('SIGTERM', graceful);
+process.on('SIGINT' , graceful);
 
 // start the server if `$ node server.js`
 if (require.main === module) {
