@@ -1,5 +1,5 @@
 {
-    "name": "NewsItem",
+    "name": "NewsArticle",
     "base": "PersistedModel",
     "properties": {
         "title": {
@@ -18,8 +18,8 @@
             "null": false,
             "length": 2000
         },
-        "imagePath": {
-            "type": "string"
+        "imageMetaData": {
+            "type": "object"
         },
         "url": {
             "type": "string",
@@ -36,11 +36,12 @@
             "length": 200
         }
     },
+    "hidden": ["imageMetaData"],
     "validations": [],
     "relations": {
         "source": {
             "type": "belongsTo",
-            "model": "NewsEventSource",
+            "model": "NewsSource",
             "foreignKey": "sourceId"
         }
     },

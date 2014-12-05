@@ -17,6 +17,13 @@
             "principalId": "$everyone",
             "permission": "ALLOW",
             "property": "download"
+        },
+        {
+            "accessType": "EXECUTE",
+            "principalType": "ROLE",
+            "principalId": "$everyone",
+            "permission": "ALLOW",
+            "property": "getFile"
         }
     ],
     "methods": []

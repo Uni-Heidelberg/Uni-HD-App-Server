@@ -4,10 +4,10 @@ var async = require('async');
 
 var md = require('html-md');
 
-var NewsEventSource = app.models.NewsEventSource;
-var EventItem = app.models.EventItem;
+var NewsSource = app.models.NewsSource;
+var NewsEvent = app.models.NewsEvent;
 
-var nullOrString = function(testStr) {
+var nullOrString = function (testStr) {
     return testStr.length > 0 ? testStr : null;
 };
 
@@ -17,7 +17,7 @@ module.exports = function (agenda) {
         function (job, done) {
             console.log('Starting parsing hephysto data');
 
-            NewsEventSource.find({
+            NewsSource.find({
                 "where": {
                     "type": "hephysto"
                 }
@@ -29,7 +29,7 @@ module.exports = function (agenda) {
                 async.each(
                     hephystos,
                     function (hephysto, callback) {
-                        if(!(hephysto.options && hephysto.options.hephysto && hephysto.options.hephysto.url)) {
+                        if (!(hephysto.options && hephysto.options.hephysto && hephysto.options.hephysto.url)) {
                             callback('invalid hephysto source');
                             return;
                         }
@@ -64,41 +64,39 @@ module.exports = function (agenda) {
                                             speakerEmail: nullOrString(hephystoTalk.speaker.email)
                                         };
 
-                                        EventItem.findOrCreate(
+                                        NewsEvent.findOrCreate(
                                             {
                                                 where: {
                                                     urlHash: eventData.urlHash
                                                 }
                                             },
                                             eventData,
-                                            function (err, eventItem) {
+                                            function (err, event) {
                                                 if (err) {
                                                     callback(err);
                                                     return;
                                                 }
 
-                                                eventItem.title = eventData.title;
-                                                eventItem.date = eventData.date;
-                                                eventItem.abstract = eventData.abstract;
-                                                eventItem.building = eventData.building;
-                                                eventItem.room = eventData.room;
-                                                eventItem.url = eventData.url;
+                                                event.title = eventData.title;
+                                                event.date = eventData.date;
+                                                event.abstract = eventData.abstract;
+                                                event.building = eventData.building;
+                                                event.room = eventData.room;
+                                                event.url = eventData.url;
 
-                                                eventItem.speakerName = eventData.speakerName;
-                                                eventItem.speakerAffiliation = eventData.speakerAffiliation;
-                                                eventItem.speakerUrl = eventData.speakerUrl;
-                                                eventItem.speakerEmail = eventData.speakerEmail;
+                                                event.speakerName = eventData.speakerName;
+                                                event.speakerAffiliation = eventData.speakerAffiliation;
+                                                event.speakerUrl = eventData.speakerUrl;
+                                                event.speakerEmail = eventData.speakerEmail;
 
-                                                eventItem.save();
+                                                event.save();
 
                                                 callback(null);
                                             }
                                         );
                                     },
                                     function (err) {
-                                        if (err) {
-                                            console.warn(err);
-                                        }
+                                        callback(err);
                                     }
                                 );
                             }

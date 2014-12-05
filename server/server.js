@@ -61,7 +61,7 @@ jobTypes.forEach(function(type) {
 });
 
 agenda.every(app.get('feed interval'), 'parse feeds');
-agenda.every(app.get('canteen interval'), 'parse canteen content');
+agenda.every(app.get('canteen interval'), 'parse canteens');
 agenda.every(app.get('hephysto interval'), 'parse hephysto');
 
 agenda.now('reload hephysto sources', {categoryId: 5});

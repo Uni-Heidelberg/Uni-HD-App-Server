@@ -1,7 +1,7 @@
 var app = require('../../server');
 var request = require('request');
 
-var NewsEventSource = app.models.NewsEventSource;
+var NewsSource = app.models.NewsSource;
 
 var urls = {
     all: 'http://www.physik.uni-heidelberg.de/hephysto/tools/seminarinfo.php',
@@ -28,10 +28,11 @@ module.exports = function (agenda) {
                     if (error || response.statusCode != 200) {
                         console.log(error);
                         console.log(response.statusCode);
+                        done(null);
                         return;
                     }
 
-                    NewsEventSource.find({
+                    NewsSource.find({
                             "where": {
                                 "type": "hephysto"
                             }
@@ -52,7 +53,7 @@ module.exports = function (agenda) {
                                     var talkSerie = talkSeries[sId];
 
                                     if (eventSource.options === null) {
-                                        NewsEventSource.destroyById(eventSource.id);
+                                        NewsSource.destroyById(eventSource.id);
                                         break;
                                     }
                                     if (eventSource.options.hephysto
@@ -75,7 +76,7 @@ module.exports = function (agenda) {
                                 }
 
                                 if(!found) {
-                                    NewsEventSource.destroyById(eventSource.id);
+                                    NewsSource.destroyById(eventSource.id);
                                 }
                             }
 
@@ -101,7 +102,7 @@ module.exports = function (agenda) {
                                     categoryId: data.categoryId
                                 };
 
-                                NewsEventSource.create(eventSourceData, function(err, eventSource) {
+                                NewsSource.create(eventSourceData, function(err, eventSource) {
                                     if(err) {
                                         console.warn('reload hephysto sources:');
                                         console.warn(err.message);

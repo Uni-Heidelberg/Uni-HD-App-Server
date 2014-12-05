@@ -1,6 +1,6 @@
 {
-    "name": "EventItem",
-    "base": "NewsItem",
+    "name": "NewsEvent",
+    "base": "NewsArticle",
     "properties": {
         "abstract": {
             "type": "string",

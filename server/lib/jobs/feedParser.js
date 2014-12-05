@@ -7,8 +7,8 @@ var async = require('async');
 
 var md = require('html-md');
 
-var NewsEventSource = app.models.NewsEventSource;
-var NewsItem = app.models.NewsItem;
+var NewsSource = app.models.NewsSource;
+var NewsArticle = app.models.NewsArticle;
 
 
 module.exports = function (agenda) {
@@ -17,7 +17,7 @@ module.exports = function (agenda) {
         function (job, done) {
             console.log('Starting parsing news feeds');
 
-            NewsEventSource.find({
+            NewsSource.find({
                 "where": {
                     "type": "feed"
                 }
@@ -43,7 +43,7 @@ module.exports = function (agenda) {
 };
 
 var parseFeed = function (feed, callback) {
-    if (!feed instanceof app.models.NewsEventSource) {
+    if (!feed instanceof app.models.NewsSource) {
         throw "wrong data type supplied";
     }
 
@@ -55,65 +55,67 @@ var parseFeed = function (feed, callback) {
                 throw err;
             async.each(
                 articles,
-                makeArticleParser(feed)
+                makeFeedArticleParser(feed)
             );
         }
     );
 };
 
-var makeArticleParser = function (feed) {
-    return function (article, callback) {
+var makeFeedArticleParser = function (feed) {
+    return function (feedArticle, callback) {
         if (
-            !article.published || article.published.getFullYear() < 2010
-            || article.content.length < 5
-            || article.published.toString() === 'Invalid Date'
+            !feedArticle.published
+            || feedArticle.published.getFullYear() < 2010
+            || feedArticle.content.length < 5
+            || feedArticle.published.toString() === 'Invalid Date'
         ) {
+            callback(null);
             return;
         }
-        if (article.link.indexOf('http://') === -1) {
-            article.link = 'http://' + article.link;
+        if (feedArticle.link.indexOf('http://') === -1) {
+            feedArticle.link = 'http://' + feedArticle.link;
         }
-        var itemData = {
-            title: article.title,
-            date: article.published,
-            abstract: md(article.content),
-            url: article.link
+        var articleData = {
+            title: feedArticle.title,
+            date: feedArticle.published,
+            abstract: md(feedArticle.content),
+            url: feedArticle.link
         };
         request.get(
-            article.link,
-            (function (itemData, feed) {
+            feedArticle.link,
+            (function (articleData, feed) {
                 return function (err, res) {
                     if (err) {
                         return;
                     }
-                    itemData.url = res.request.uri.href;
-                    itemData.urlHash =
+                    articleData.url = res.request.uri.href;
+                    articleData.urlHash =
                         crypto
                             .createHash('sha1')
                             .update(res.request.uri.href)
                             .digest('hex');
-                    NewsItem.findOrCreate(
-                        {where: {urlHash: itemData.urlHash}},
-                        itemData,
-                        function (err, item) {
+                    NewsArticle.findOrCreate(
+                        {where: {urlHash: articleData.urlHash}},
+                        articleData,
+                        function (err, article) {
                             if (err) {
                                 console.log(err);
                             }
-                            item.title = itemData.title;
-                            item.date = itemData.date;
-                            item.abstract =
-                                itemData
+                            article.title = articleData.title;
+                            article.date = articleData.date;
+                            article.abstract =
+                                articleData
                                     .abstract
                                     .replace(/\\/, '')
                                     .replace(/\\\./, '.');
-                            item.source(feed);
-                            item.save();
+                            article.source(feed);
+                            article.save();
 
                             callback(null);
                         }
                     );
                 };
-            })(itemData, feed, callback)
+            })(articleData, feed, callback)
         );
     };
 };

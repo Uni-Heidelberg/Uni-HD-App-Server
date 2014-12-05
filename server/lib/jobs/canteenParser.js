@@ -18,7 +18,7 @@ var CanteenSection = app.models.CanteenSection;
 
 module.exports = function (agenda) {
     agenda.define(
-        'parse canteen content',
+        'parse canteens',
         function (job, done) {
             console.log('Starting parsing data for canteens...');
 

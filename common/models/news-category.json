@@ -28,7 +28,7 @@
         },
         "sources": {
             "type": "hasMany",
-            "model": "NewsEventSource",
+            "model": "NewsSource",
             "foreignKey": "categoryId"
         }
     },
@@ -106,7 +106,7 @@
             "principalType": "ROLE",
             "principalId": "$everyone",
             "permission": "ALLOW",
-            "property": "getItems"
+            "property": "getArticles"
         }
     ],
     "methods": []

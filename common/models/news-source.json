@@ -1,5 +1,5 @@
 {
-    "name": "NewsEventSource",
+    "name": "NewsSource",
     "base": "PersistedModel",
     "properties": {
         "name": {
@@ -26,14 +26,14 @@
             "model": "NewsCategory",
             "foreignKey": "categoryId"
         },
-        "eventItems": {
+        "events": {
             "type": "hasMany",
-            "model": "EventItem",
+            "model": "NewsEvent",
             "foreignKey": "sourceId"
         },
-        "newsItems": {
+        "articles": {
             "type": "hasMany",
-            "model": "NewsItem",
+            "model": "NewsArticle",
             "foreignKey": "sourceId"
         }
     },
@@ -62,42 +62,42 @@
             "principalType": "ROLE",
             "principalId": "$everyone",
             "permission": "ALLOW",
-            "property": "__get__eventItems"
+            "property": "__get__events"
         },
         {
             "accessType": "EXECUTE",
             "principalType": "ROLE",
             "principalId": "$everyone",
             "permission": "ALLOW",
-            "property": "__findById__eventItems"
+            "property": "__findById__events"
         },
         {
             "accessType": "EXECUTE",
             "principalType": "ROLE",
             "principalId": "$everyone",
             "permission": "ALLOW",
-            "property": "__count__eventItems"
+            "property": "__count__events"
         },
         {
             "accessType": "EXECUTE",
             "principalType": "ROLE",
             "principalId": "$everyone",
             "permission": "ALLOW",
-            "property": "__get__newsItems"
+            "property": "__get__articles"
         },
         {
             "accessType": "EXECUTE",
             "principalType": "ROLE",
             "principalId": "$everyone",
             "permission": "ALLOW",
-            "property": "__findById__newsItems"
+            "property": "__findById__articles"
         },
         {
             "accessType": "EXECUTE",
             "principalType": "ROLE",
             "principalId": "$everyone",
             "permission": "ALLOW",
-            "property": "__count__newsItems"
+            "property": "__count__articles"
         }
     ],
     "methods": []

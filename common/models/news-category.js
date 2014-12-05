@@ -1,8 +1,8 @@
 var app = require('../../server/server');
 
 module.exports = function (NewsCategory) {
-    NewsCategory.prototype.getItems = function (cb) {
-        app.models.NewsEventSource.find(
+    NewsCategory.prototype.getArticles = function (cb) {
+        app.models.NewsSource.find(
             {
                 'fields': ['id'],
                 'where': {
@@ -13,7 +13,7 @@ module.exports = function (NewsCategory) {
                 for (var i = 0; i < sources.length; i++) {
                     sourceIds.push(sources[i].id);
                 }
-                app.models.NewsItem.find(
+                app.models.NewsArticle.find(
                     {
                         'where': {
                             'sourceId': {
@@ -29,20 +29,20 @@ module.exports = function (NewsCategory) {
     };
 
     NewsCategory.remoteMethod(
-        'getItems',
+        'getArticles',
         {
             returns: {arg: 'items', type: 'array', root: true},
             isStatic: false,
             http: {
                 verb: 'get',
-                path: '/newsItems'
+                path: '/articles'
             }
         }
     );
 
 
     NewsCategory.prototype.getEvents = function (cb) {
-        app.models.NewsEventSource.find(
+        app.models.NewsSource.find(
             {
                 'fields': ['id'],
                 'where': {
@@ -53,7 +53,7 @@ module.exports = function (NewsCategory) {
                 for (var i = 0; i < sources.length; i++) {
                     sourceIds.push(sources[i].id);
                 }
-                app.models.EventItem.find(
+                app.models.NewsEvent.find(
                     {
                         'where': {
                             'sourceId': {
@@ -75,7 +75,7 @@ module.exports = function (NewsCategory) {
             returns: {arg: 'events', type: 'array', root: true},
             http: {
                 verb: 'get',
-                path: '/eventItems'
+                path: '/events'
             }
         }
     );

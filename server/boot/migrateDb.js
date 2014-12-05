@@ -3,7 +3,7 @@ module.exports = function (app) {
     var db = app.datasources.appserver;
 
     var NewsCategory = app.models.NewsCategory;
-    var NewsEventSource = app.models.NewsEventSource;
+    var NewsSource = app.models.NewsSource;
 
     var Canteen = app.models.Canteen;
     var CanteenSection = app.models.CanteenSection;
@@ -34,7 +34,7 @@ module.exports = function (app) {
                     if (err || category === null) {
                         throw err;
                     }
-                    NewsEventSource.create({
+                    NewsSource.create({
                         type: 'feed',
                         name: 'Feed der Pressestelle der Universität Heidelberg',
                         url: 'http://www.uni-heidelberg.de/presse/rss.xml',
@@ -63,7 +63,7 @@ module.exports = function (app) {
                     if (err || category === null) {
                         throw err;
                     }
-                    NewsEventSource.create({
+                    NewsSource.create({
                         type: 'feed',
                         name: 'Feed der Fakultät für Physik und Astronomie',
                         url: 'http://www.physik.uni-heidelberg.de/aktuelles/rss/rss.xml',
@@ -83,7 +83,7 @@ module.exports = function (app) {
                     if (err || category === null) {
                         throw err;
                     }
-                    NewsEventSource.create({
+                    NewsSource.create({
                         type: 'feed',
                         name: 'Feed des Kirchhoff Instituts für Physik',
                         url: 'http://www.kip.uni-heidelberg.de/rss/rss.xml',

@@ -46,15 +46,15 @@
         "dataSource": "appserver",
         "public": true
     },
-    "NewsEventSource": {
+    "NewsSource": {
         "dataSource": "appserver",
         "public": true
     },
-    "NewsItem": {
+    "NewsArticle": {
         "dataSource": "appserver",
         "public": true
     },
-    "EventItem": {
+    "NewsEvent": {
         "dataSource": "appserver",
         "public": true
     },
