@@ -3,7 +3,7 @@ module.exports = function (NewsArticle) {
         this.imageUrl = '';
     };
 
-    NewsArticle.beforeSave = function(next, modelInstance) {
+    NewsArticle.beforeSave = function (next, modelInstance) {
         delete modelInstance.imageUrl;
 
         next();

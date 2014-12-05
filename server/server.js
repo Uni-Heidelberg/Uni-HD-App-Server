@@ -56,7 +56,7 @@ jobTypes = [
     'reloadHephystoSources'
 ];
 
-jobTypes.forEach(function(type) {
+jobTypes.forEach(function (type) {
     require('./lib/jobs/' + type)(agenda);
 });
 
@@ -64,22 +64,34 @@ agenda.every(app.get('feed interval'), 'parse feeds');
 agenda.every(app.get('canteen interval'), 'parse canteens');
 agenda.every(app.get('hephysto interval'), 'parse hephysto');
 
-agenda.now('reload hephysto sources', {categoryId: 5});
+app.models.NewsCategory.findOne(
+    {
+        where: {
+            title: 'Kolloquien'
+        }
+    },
+    function (err, category) {
+        if (err || category === null) {
+            throw err;
+        }
+        agenda.now('reload hephysto sources', {categoryId: category.id});
+    }
+);
 
 agenda.start();
 
-agenda.purge(function(err, numRemoved) {
+agenda.purge(function (err, numRemoved) {
     console.log(numRemoved);
 });
 
 function graceful() {
-    agenda.stop(function() {
+    agenda.stop(function () {
         process.exit(0);
     });
 }
 
 process.on('SIGTERM', graceful);
-process.on('SIGINT' , graceful);
+process.on('SIGINT', graceful);
 
 // start the server if `$ node server.js`
 if (require.main === module) {

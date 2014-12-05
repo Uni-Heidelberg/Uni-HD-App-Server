@@ -8,7 +8,7 @@ var urls = {
     base: 'http://www.physik.uni-heidelberg.de/hephysto/tools/seminarinfo.php?id='
 };
 
-var nullOrString = function(testStr) {
+var nullOrString = function (testStr) {
     return testStr.length > 0 ? testStr : null;
 };
 
@@ -75,14 +75,14 @@ module.exports = function (agenda) {
                                     }
                                 }
 
-                                if(!found) {
+                                if (!found) {
                                     NewsSource.destroyById(eventSource.id);
                                 }
                             }
 
                             for (var i = 0; i < talkSeries.length; i++) {
                                 var talkSerie = talkSeries[i];
-                                if(notToInsertIds.indexOf(talkSerie.eventId) != -1) {
+                                if (notToInsertIds.indexOf(talkSerie.eventId) != -1) {
                                     continue;
                                 }
 
@@ -102,14 +102,18 @@ module.exports = function (agenda) {
                                     categoryId: data.categoryId
                                 };
 
-                                NewsSource.create(eventSourceData, function(err, eventSource) {
-                                    if(err) {
+                                NewsSource.create(eventSourceData, function (err, eventSource) {
+                                    if (err) {
                                         console.warn('reload hephysto sources:');
                                         console.warn(err.message);
                                     }
                                 });
                             }
 
+                            if (job.attrs.type == 'normal') {
+                                job.remove(function () {
+                                });
+                            }
                             done();
                         }
                     );
