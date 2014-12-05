@@ -100,5 +100,8 @@
             "property": "__count__articles"
         }
     ],
-    "methods": []
+    "methods": [],
+    "http": {
+        "path": "news/sources"
+    }
 }

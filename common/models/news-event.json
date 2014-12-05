@@ -41,5 +41,8 @@
             "permission": "DENY"
         }
     ],
-    "methods": []
+    "methods": [],
+    "http": {
+        "path": "news/events"
+    }
 }

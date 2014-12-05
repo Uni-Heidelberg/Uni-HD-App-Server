@@ -1,6 +1,5 @@
 {
     "name": "NewsCategory",
-    "plural": "NewsCategories",
     "base": "PersistedModel",
     "properties": {
         "title": {
@@ -109,5 +108,8 @@
             "property": "getArticles"
         }
     ],
-    "methods": []
+    "methods": [],
+    "http": {
+        "path": "news/categories"
+    }
 }

@@ -66,5 +66,8 @@
             "property": "__get__source"
         }
     ],
-    "methods": []
+    "methods": [],
+    "http": {
+        "path": "news/articles"
+    }
 }
