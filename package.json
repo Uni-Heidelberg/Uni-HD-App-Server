@@ -6,7 +6,7 @@
     "pretest": "jshint ."
   },
   "dependencies": {
-    "agenda": "^0.6.25",
+    "agenda": "^0.6.26",
     "async": "^0.9.0",
     "clim": "^1.0.0",
     "compression": "^1.0.3",
@@ -18,7 +18,7 @@
     "loopback": "^2.8.2",
     "loopback-boot": "^2.5.0",
     "loopback-component-storage": "^1.0.6",
-    "loopback-connector-mysql": "^1.4.8",
+    "loopback-connector-mysql": "^1.4.9",
     "loopback-datasource-juggler": "^2.11.0",
     "request": "^2.49.0",
     "serve-favicon": "^2.1.7"
