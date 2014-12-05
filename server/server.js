@@ -72,7 +72,7 @@ app.models.NewsCategory.findOne(
     },
     function (err, category) {
         if (err || category === null) {
-            throw err;
+            return console.error(err);
         }
         agenda.now('reload hephysto sources', {categoryId: category.id});
     }
