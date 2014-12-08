@@ -86,7 +86,7 @@ module.exports = function (agenda) {
 
                                                 switch (i) {
                                                     case 0:
-                                                        mealData.title = el.text().trim().replace(/\n/g, '');
+                                                        mealData.title = el.text().trim().replace(/\n/g, '').replace(/ \([\d, ]*\)/,'');
                                                         break;
                                                     case 1:
                                                         mealData.sectionTitle = el.text().trim();
