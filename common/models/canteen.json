@@ -1,6 +1,6 @@
 {
     "name": "Canteen",
-    "base": "PersistedModel",
+    "base": "ImageBase",
     "http": {
         "path": "mensa/canteens"
     },
