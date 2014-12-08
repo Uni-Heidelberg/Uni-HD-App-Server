@@ -1,6 +1,12 @@
 {
     "name": "NewsSource",
     "base": "PersistedModel",
+    "hidden": [
+        "options"
+    ],
+    "http": {
+        "path": "news/sources"
+    },
     "properties": {
         "name": {
             "type": "string",
@@ -18,7 +24,6 @@
             "type": "object"
         }
     },
-    "hidden": ["options"],
     "validations": [],
     "relations": {
         "category": {
@@ -26,14 +31,19 @@
             "model": "NewsCategory",
             "foreignKey": "categoryId"
         },
+        "articles": {
+            "type": "hasMany",
+            "model": "NewsArticle",
+            "foreignKey": "sourceId"
+        },
         "events": {
             "type": "hasMany",
             "model": "NewsEvent",
             "foreignKey": "sourceId"
         },
-        "articles": {
+        "talks": {
             "type": "hasMany",
-            "model": "NewsArticle",
+            "model": "NewsTalk",
             "foreignKey": "sourceId"
         }
     },
@@ -62,6 +72,27 @@
             "principalType": "ROLE",
             "principalId": "$everyone",
             "permission": "ALLOW",
+            "property": "__get__articles"
+        },
+        {
+            "accessType": "EXECUTE",
+            "principalType": "ROLE",
+            "principalId": "$everyone",
+            "permission": "ALLOW",
+            "property": "__findById__articles"
+        },
+        {
+            "accessType": "EXECUTE",
+            "principalType": "ROLE",
+            "principalId": "$everyone",
+            "permission": "ALLOW",
+            "property": "__count__articles"
+        },
+        {
+            "accessType": "EXECUTE",
+            "principalType": "ROLE",
+            "principalId": "$everyone",
+            "permission": "ALLOW",
             "property": "__get__events"
         },
         {
@@ -83,25 +114,22 @@
             "principalType": "ROLE",
             "principalId": "$everyone",
             "permission": "ALLOW",
-            "property": "__get__articles"
+            "property": "__get__talks"
         },
         {
             "accessType": "EXECUTE",
             "principalType": "ROLE",
             "principalId": "$everyone",
             "permission": "ALLOW",
-            "property": "__findById__articles"
+            "property": "__findById__talks"
         },
         {
             "accessType": "EXECUTE",
             "principalType": "ROLE",
             "principalId": "$everyone",
             "permission": "ALLOW",
-            "property": "__count__articles"
+            "property": "__count__talks"
         }
     ],
-    "methods": [],
-    "http": {
-        "path": "news/sources"
-    }
+    "methods": []
 }

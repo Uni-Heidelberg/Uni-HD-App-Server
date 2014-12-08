@@ -1,6 +1,9 @@
 {
     "name": "NewsArticle",
-    "base": "PersistedModel",
+    "base": "ImageBase",
+    "http": {
+        "path": "news/articles"
+    },
     "properties": {
         "title": {
             "type": "string",
@@ -13,13 +16,10 @@
             "null": false
         },
         "abstract": {
-            "type": "string",
+            "type": "text",
             "required": true,
             "null": false,
             "length": 2000
-        },
-        "imageMetaData": {
-            "type": "object"
         },
         "url": {
             "type": "string",
@@ -36,7 +36,6 @@
             "length": 200
         }
     },
-    "hidden": ["imageMetaData"],
     "validations": [],
     "relations": {
         "source": {
@@ -66,8 +65,5 @@
             "property": "__get__source"
         }
     ],
-    "methods": [],
-    "http": {
-        "path": "news/articles"
-    }
+    "methods": []
 }

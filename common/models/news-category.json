@@ -1,13 +1,11 @@
 {
     "name": "NewsCategory",
-    "base": "PersistedModel",
+    "base": "ImageBase",
+    "http": {
+        "path": "news/categories"
+    },
     "properties": {
         "title": {
-            "type": "string",
-            "required": true,
-            "null": false
-        },
-        "imagePath": {
             "type": "string",
             "required": true,
             "null": false
@@ -108,8 +106,5 @@
             "property": "getArticles"
         }
     ],
-    "methods": [],
-    "http": {
-        "path": "news/categories"
-    }
+    "methods": []
 }

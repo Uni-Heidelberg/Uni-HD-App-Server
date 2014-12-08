@@ -20,15 +20,13 @@ module.exports = function (app) {
 
             console.log('No data in database, generating sample data...');
             NewsCategory.create({
-                title: 'Universität Heidelberg',
-                imagePath: 'something'
+                title: 'Universität Heidelberg'
             }, function (err, category) {
                 if (err || category === null) {
                     throw err;
                 }
                 NewsCategory.create({
                     title: "Pressestelle der Universität Heidelberg",
-                    imagePath: 'something',
                     parent: category
                 }, function (err, category) {
                     if (err || category === null) {
@@ -48,56 +46,36 @@ module.exports = function (app) {
             });
 
             NewsCategory.create({
-                title: 'Physik',
-                imagePath: 'something'
+                title: 'Physik'
             }, function (err, category) {
                 if (err || category === null) {
                     throw err;
                 }
 
-                NewsCategory.create({
-                    title: 'Fakultät für Physik und Astronomie',
-                    imagePath: 'something',
-                    parent: category
-                }, function (err, category) {
-                    if (err || category === null) {
+                NewsSource.create({
+                    type: 'feed',
+                    name: 'Fakultät für Physik und Astronomie',
+                    url: 'http://www.physik.uni-heidelberg.de/aktuelles/rss/rss.xml',
+                    category: category
+                }, function (err, source) {
+                    if (err || source === null) {
                         throw err;
                     }
-                    NewsSource.create({
-                        type: 'feed',
-                        name: 'Feed der Fakultät für Physik und Astronomie',
-                        url: 'http://www.physik.uni-heidelberg.de/aktuelles/rss/rss.xml',
-                        category: category
-                    }, function (err, source) {
-                        if (err || source === null) {
-                            throw err;
-                        }
-                    });
                 });
 
-                NewsCategory.create({
-                    title: 'Kirchhoff Institut für Physik',
-                    imagePath: 'something',
-                    parent: category
-                }, function (err, category) {
-                    if (err || category === null) {
+                NewsSource.create({
+                    type: 'feed',
+                    name: 'Kirchhoff Instituts für Physik',
+                    url: 'http://www.kip.uni-heidelberg.de/rss/rss.xml',
+                    category: category
+                }, function (err, source) {
+                    if (err || source === null) {
                         throw err;
                     }
-                    NewsSource.create({
-                        type: 'feed',
-                        name: 'Feed des Kirchhoff Instituts für Physik',
-                        url: 'http://www.kip.uni-heidelberg.de/rss/rss.xml',
-                        category: category
-                    }, function (err, source) {
-                        if (err || source === null) {
-                            throw err;
-                        }
-                    });
                 });
 
                 NewsCategory.create({
                     title: 'Kolloquien',
-                    imagePath: 'something',
                     parent: category
                 }, function (err, category) {
                     if (err || category === null) {

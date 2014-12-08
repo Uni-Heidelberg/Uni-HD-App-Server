@@ -5,7 +5,7 @@ var async = require('async');
 var md = require('html-md');
 
 var NewsSource = app.models.NewsSource;
-var NewsEvent = app.models.NewsEvent;
+var NewsTalk = app.models.NewsTalk;
 
 var nullOrString = function (testStr) {
     return testStr.length > 0 ? testStr : null;
@@ -64,32 +64,32 @@ module.exports = function (agenda) {
                                             speakerEmail: nullOrString(hephystoTalk.speaker.email)
                                         };
 
-                                        NewsEvent.findOrCreate(
+                                        NewsTalk.findOrCreate(
                                             {
                                                 where: {
                                                     urlHash: eventData.urlHash
                                                 }
                                             },
                                             eventData,
-                                            function (err, event) {
+                                            function (err, talk) {
                                                 if (err) {
                                                     callback(err);
                                                     return;
                                                 }
 
-                                                event.title = eventData.title;
-                                                event.date = eventData.date;
-                                                event.abstract = eventData.abstract;
-                                                event.building = eventData.building;
-                                                event.room = eventData.room;
-                                                event.url = eventData.url;
+                                                talk.title = eventData.title;
+                                                talk.date = eventData.date;
+                                                talk.abstract = eventData.abstract;
+                                                talk.building = eventData.building;
+                                                talk.room = eventData.room;
+                                                talk.url = eventData.url;
 
-                                                event.speakerName = eventData.speakerName;
-                                                event.speakerAffiliation = eventData.speakerAffiliation;
-                                                event.speakerUrl = eventData.speakerUrl;
-                                                event.speakerEmail = eventData.speakerEmail;
+                                                talk.speakerName = eventData.speakerName;
+                                                talk.speakerAffiliation = eventData.speakerAffiliation;
+                                                talk.speakerUrl = eventData.speakerUrl;
+                                                talk.speakerEmail = eventData.speakerEmail;
 
-                                                event.save();
+                                                talk.save();
 
                                                 callback(null);
                                             }

@@ -1,0 +1,25 @@
+{
+    "name": "NewsTalk",
+    "base": "NewsEvent",
+    "http": {
+        "path": "news/talks"
+    },
+    "properties": {
+        "speakerName": {
+            "type": "string"
+        },
+        "speakerAffiliation": {
+            "type": "string"
+        },
+        "speakerEmail": {
+            "type": "string"
+        },
+        "speakerUrl": {
+            "type": "string"
+        }
+    },
+    "validations": [],
+    "relations": {},
+    "acls": [],
+    "methods": []
+}

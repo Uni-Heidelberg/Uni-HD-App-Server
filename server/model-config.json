@@ -58,8 +58,16 @@
         "dataSource": "appserver",
         "public": true
     },
+    "NewsTalk": {
+        "dataSource": "appserver",
+        "public": true
+    },
     "Files": {
         "dataSource": "storage",
         "public": true
+    },
+    "ImageBase": {
+        "dataSource": "db",
+        "public": false
     }
 }

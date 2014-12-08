@@ -1,0 +1,16 @@
+{
+    "name": "ImageBase",
+    "base": "PersistedModel",
+    "hidden": [
+        "imagePath"
+    ],
+    "properties": {
+        "imagePath": {
+            "type": "string"
+        }
+    },
+    "validations": [],
+    "relations": {},
+    "acls": [],
+    "methods": []
+}

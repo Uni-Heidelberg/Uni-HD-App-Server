@@ -1,9 +1,12 @@
 {
     "name": "NewsEvent",
     "base": "NewsArticle",
+    "http": {
+        "path": "news/events"
+    },
     "properties": {
         "abstract": {
-            "type": "string",
+            "type": "text",
             "length": 2000
         },
         "building": {
@@ -11,38 +14,10 @@
         },
         "room": {
             "type": "string"
-        },
-        "speakerName": {
-            "type": "string"
-        },
-        "speakerAffiliation": {
-            "type": "string"
-        },
-        "speakerEmail": {
-            "type": "string"
-        },
-        "speakerUrl": {
-            "type": "string"
         }
     },
     "validations": [],
     "relations": {},
-    "acls": [
-        {
-            "accessType": "WRITE",
-            "principalType": "ROLE",
-            "principalId": "$everyone",
-            "permission": "DENY"
-        },
-        {
-            "accessType": "EXECUTE",
-            "principalType": "ROLE",
-            "principalId": "$everyone",
-            "permission": "DENY"
-        }
-    ],
-    "methods": [],
-    "http": {
-        "path": "news/events"
-    }
+    "acls": [],
+    "methods": []
 }
