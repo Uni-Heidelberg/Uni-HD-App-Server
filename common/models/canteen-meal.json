@@ -7,6 +7,9 @@
             "kind": "unique"
         }
     },
+    "http": {
+        "path": "mensa/meals"
+    },
     "properties": {
         "title": {
             "type": "string",

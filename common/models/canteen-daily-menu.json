@@ -7,6 +7,9 @@
             "kind": "unique"
         }
     },
+    "http": {
+        "path": "mensa/daily-menus"
+    },
     "properties": {
         "date": {
             "type": "date",

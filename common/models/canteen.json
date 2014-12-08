@@ -1,6 +1,9 @@
 {
     "name": "Canteen",
     "base": "PersistedModel",
+    "http": {
+        "path": "mensa/canteens"
+    },
     "properties": {
         "title": {
             "type": "string",
