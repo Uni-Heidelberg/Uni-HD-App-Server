@@ -23,15 +23,13 @@ module.exports = function (agenda) {
                 }
             }, function (err, hephystos) {
                 if (err) {
-                    console.warn(err);
-                    return;
+                    return console.warn('hephystoParser', err);
                 }
                 async.each(
                     hephystos,
                     function (hephysto, callback) {
                         if (!(hephysto.options && hephysto.options.hephysto && hephysto.options.hephysto.url)) {
-                            callback('invalid hephysto source');
-                            return;
+                            return callback('invalid hephysto source');
                         }
                         request(
                             {
@@ -39,9 +37,8 @@ module.exports = function (agenda) {
                                 json: true
                             }, function (err, response, body) {
                                 if (err || response.statusCode != 200) {
-                                    console.warn('hephystoParser: ', err);
-                                    callback('request error');
-                                    return;
+                                    console.warn('hephystoParser', err);
+                                    return callback('request error');
                                 }
                                 async.each(
                                     body,
@@ -72,8 +69,7 @@ module.exports = function (agenda) {
                                             eventData,
                                             function (err, talk) {
                                                 if (err) {
-                                                    callback(err);
-                                                    return;
+                                                    return callback(err);
                                                 }
 
                                                 talk.title = eventData.title;
@@ -103,7 +99,7 @@ module.exports = function (agenda) {
                     },
                     function (err) {
                         if (err) {
-                            console.warn(err);
+                            console.warn('hephystoParser', err);
                         }
                     }
                 );

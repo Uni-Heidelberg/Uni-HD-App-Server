@@ -23,15 +23,14 @@ module.exports = function (agenda) {
                 }
             }, function (err, feeds) {
                 if (err) {
-                    console.log(err);
-                    return;
+                    return console.warn('feedParser: ', err);
                 }
                 async.each(
                     feeds,
                     parseFeed,
                     function (err) {
                         if (err) {
-                            console.log(err);
+                            console.warn('feedParser: ', err);
                         }
                     }
                 );
@@ -51,8 +50,9 @@ var parseFeed = function (feed, callback) {
     feedRead(
         feed.url,
         function (err, articles) {
-            if (err)
-                throw err;
+            if (err) {
+                return console.warn('feedParser', err);
+            }
             async.each(
                 articles,
                 makeFeedArticleParser(feed)
@@ -69,8 +69,7 @@ var makeFeedArticleParser = function (feed) {
             || feedArticle.content.length < 5
             || feedArticle.published.toString() === 'Invalid Date'
         ) {
-            callback(null);
-            return;
+            return callback(null);
         }
         if (feedArticle.link.indexOf('http://') === -1) {
             feedArticle.link = 'http://' + feedArticle.link;
@@ -86,8 +85,7 @@ var makeFeedArticleParser = function (feed) {
             (function (articleData, feed) {
                 return function (err, res) {
                     if (err) {
-                        console.warn('feedParser: ',err);
-                        return;
+                        return console.warn('feedParser', err);
                     }
                     articleData.url = res.request.uri.href;
                     articleData.urlHash =
@@ -100,7 +98,7 @@ var makeFeedArticleParser = function (feed) {
                         articleData,
                         function (err, article) {
                             if (err) {
-                                console.log(err);
+                                return console.warn('feedParser', err);
                             }
                             article.title = articleData.title;
                             article.date = articleData.date;

@@ -29,13 +29,17 @@ module.exports = function (agenda) {
                 }
             }, function (err, canteens) {
                 if (err) {
-                    return;
+                    return console.warn('canteenParser', err);
                 }
 
                 // Rufe die Webseite des Studentenwerks auf und wandle es in ein DOM-Object um
                 jsdom.env(
                     'http://www.studentenwerk.uni-heidelberg.de/speiseplan',
-                    function (error, window) {
+                    function (err, window) {
+                        if (err) {
+                            return console.warn('canteenParser', err);
+                        }
+
                         // Mache aus einfach DOM jQuery
                         var $ = jQuery(window);
 
@@ -86,7 +90,7 @@ module.exports = function (agenda) {
 
                                                 switch (i) {
                                                     case 0:
-                                                        mealData.title = el.text().trim().replace(/\n/g, '').replace(/ \([\d, ]*\)/,'');
+                                                        mealData.title = el.text().trim().replace(/\n/g, '').replace(/ \([\d, ]*\)/, '');
                                                         break;
                                                     case 1:
                                                         mealData.sectionTitle = el.text().trim();
@@ -101,7 +105,7 @@ module.exports = function (agenda) {
                                                         mealData.priceGuest = el.text().trim();
                                                         break;
                                                     default:
-                                                        callback('to mouch tds :O');
+                                                        callback('to much tds :O');
                                                 }
                                             });
 
@@ -117,13 +121,11 @@ module.exports = function (agenda) {
                                                 },
                                                 function (err, section) {
                                                     if (err) {
-                                                        console.log('Error finding section');
-                                                        console.log(err);
+                                                        console.warn('Error finding section', err);
                                                         return;
                                                     }
                                                     if (section === null) {
-                                                        console.log('No section found');
-                                                        console.log(mealData);
+                                                        console.warn('No section found', mealData);
                                                         return;
                                                     }
 
@@ -136,9 +138,7 @@ module.exports = function (agenda) {
                                                         dailyMenuData,
                                                         function (err, menu) {
                                                             if (err || menu === null) {
-                                                                console.log('Error finding or creating daily menu');
-                                                                console.log(err);
-                                                                console.log(menu);
+                                                                console.warn('Error finding or creating daily menu', err, menu);
                                                                 return;
                                                             }
                                                             delete mealData.sectionTitle;
@@ -157,15 +157,12 @@ module.exports = function (agenda) {
                                                                 mealData,
                                                                 function (err, meal) {
                                                                     if (err || meal === null) {
-                                                                        console.log('Error finding or creating meal');
-                                                                        console.log(err);
-                                                                        console.log(meal);
+                                                                        console.warn('Error finding or creating meal', err, meal);
                                                                         return;
                                                                     }
                                                                     menu.meals.add(meal, function (err) {
                                                                         if (err) {
-                                                                            console.log('Error adding meal to menu');
-                                                                            console.log(err);
+                                                                            console.warn('Error adding meal to menu', err);
                                                                             return;
                                                                         }
                                                                     });
@@ -182,7 +179,7 @@ module.exports = function (agenda) {
                             },
                             function (err) {
                                 if (err) {
-                                    console.log(err);
+                                    console.warn('canteenParser', err);
                                 }
                             }
                         );
