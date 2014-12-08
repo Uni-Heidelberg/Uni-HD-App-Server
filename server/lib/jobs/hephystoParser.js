@@ -39,7 +39,7 @@ module.exports = function (agenda) {
                                 json: true
                             }, function (err, response, body) {
                                 if (err || response.statusCode != 200) {
-                                    console.warn(err);
+                                    console.warn('hephystoParser: ', err);
                                     callback('request error');
                                     return;
                                 }
