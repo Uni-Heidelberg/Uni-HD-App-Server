@@ -86,6 +86,7 @@ var makeFeedArticleParser = function (feed) {
             (function (articleData, feed) {
                 return function (err, res) {
                     if (err) {
+                        console.warn(err);
                         return;
                     }
                     articleData.url = res.request.uri.href;

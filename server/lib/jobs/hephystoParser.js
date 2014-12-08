@@ -40,7 +40,6 @@ module.exports = function (agenda) {
                             }, function (err, response, body) {
                                 if (err || response.statusCode != 200) {
                                     console.warn(err);
-                                    console.warn(response.statusCode);
                                     callback('request error');
                                     return;
                                 }
