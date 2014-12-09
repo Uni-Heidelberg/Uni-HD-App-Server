@@ -4,14 +4,18 @@ module.exports = function (ImageBase) {
     var createImageObject = function (modelInstance) {
         if (modelInstance.imageContainer && modelInstance.imageName) {
             modelInstance.image = {};
-            if (!modelInstance.imageError) {
+
+            if (modelInstance.imageError) {
+                modelInstance.image.error = modelInstance.imageError;
+            } else if (!modelInstance.imageModified) {
+                modelInstance.save();
+                modelInstance.image = null;
+            } else {
                 modelInstance.image.url =
                     app.get('restApiRoot') +
                     '/storage/' + modelInstance.imageContainer +
                     '/download/' + modelInstance.imageName;
                 modelInstance.image.mtime = modelInstance.imageModified;
-            } else {
-                modelInstance.image.error = modelInstance.imageError;
             }
         } else {
             modelInstance.image = null;
