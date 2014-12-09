@@ -25,23 +25,15 @@ module.exports = function (app) {
                 if (err || category === null) {
                     throw err;
                 }
-                NewsCategory.create({
-                    title: "Pressestelle der Universität Heidelberg",
-                    parent: category
-                }, function (err, category) {
-                    if (err || category === null) {
+                NewsSource.create({
+                    type: 'feed',
+                    name: 'Feed der Pressestelle der Universität Heidelberg',
+                    url: 'http://www.uni-heidelberg.de/presse/rss.xml',
+                    category: category
+                }, function (err, source) {
+                    if (err || source === null) {
                         throw err;
                     }
-                    NewsSource.create({
-                        type: 'feed',
-                        name: 'Feed der Pressestelle der Universität Heidelberg',
-                        url: 'http://www.uni-heidelberg.de/presse/rss.xml',
-                        category: category
-                    }, function (err, source) {
-                        if (err || source === null) {
-                            throw err;
-                        }
-                    });
                 });
             });
 
@@ -171,7 +163,9 @@ module.exports = function (app) {
                     password: 'test'
                 },
                 function (err, user) {
-                    if (err) return cb(err);
+                    if (err) {
+                        return console.warn('user creation', err);
+                    }
 
                     //create the admin role
                     Role.create({
