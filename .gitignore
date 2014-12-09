@@ -1,3 +1,6 @@
+.DS_Store
+*.swo
+*.swp
 .idea
 .vagrant
 node_modules
@@ -5,3 +8,4 @@ server/datasources.json
 server/config.local.json
 server/storage/*
 !server/storage/.gitkeep
+client/vendor

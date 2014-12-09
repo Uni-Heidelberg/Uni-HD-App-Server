@@ -3,11 +3,13 @@
     "version": "0.1.0",
     "main": "server/server.js",
     "scripts": {
-        "pretest": "jshint ."
+        "pretest": "jshint .",
+        "postinstall": "bower install"
     },
     "dependencies": {
         "agenda": "^0.6.26",
         "async": "^0.9.0",
+        "bower": "^1.3.12",
         "clim": "^1.0.0",
         "compression": "^1.0.3",
         "errorhandler": "^1.3.0",
@@ -23,10 +25,9 @@
         "request": "^2.49.0",
         "serve-favicon": "^2.1.7"
     },
-    "optionalDependencies": {
-        "loopback-explorer": "^1.6.1"
-    },
+    "optionalDependencies": {},
     "devDependencies": {
+        "loopback-explorer": "^1.6.1",
         "jshint": "^2.5.10"
     }
 }
