@@ -26,10 +26,24 @@
     <script src="js/appserver.js"></script>
 </head>
 <body data-ng-controller="CanteenListCtrl">
-<ul>
-    <li data-ng-repeat="canteen in canteens">
-        <span>{{ canteen.title }}</span>
-    </li>
-</ul>
+<div class="container">
+    <div class="row">
+        <div class="col-md-10">
+            <ul>
+                <li data-ng-repeat="canteen in canteens">
+                    <span>{{ canteen.title }}</span>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-10">
+            <ul>
+                <li data-ng-repeat="category in newsCategories">
+                    <span>{{ category.title }}</span>
+                    <img ng-src="{{ category.image.url }}" />
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
 </body>
 </html>

@@ -1,6 +1,9 @@
 {
-    "name": "Files",
+    "name": "Storage",
     "base": "Model",
+    "http": {
+        "path": "storage"
+    },
     "properties": {},
     "validations": [],
     "relations": {},

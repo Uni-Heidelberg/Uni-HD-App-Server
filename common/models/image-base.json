@@ -1,11 +1,21 @@
 {
     "name": "ImageBase",
     "base": "PersistedModel",
-    "hidden": [
-        "imagePath"
-    ],
+    "hidden": [],
     "properties": {
-        "imagePath": {
+        "imageContainer": {
+            "type": "string"
+        },
+        "imageName": {
+            "type": "string"
+        },
+        "imageModified": {
+            "type": "date"
+        },
+        "imageLastCheck": {
+            "type": "date"
+        },
+        "imageError": {
             "type": "string"
         }
     },

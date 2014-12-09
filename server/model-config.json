@@ -62,7 +62,7 @@
         "dataSource": "appserver",
         "public": true
     },
-    "Files": {
+    "Storage": {
         "dataSource": "storage",
         "public": true
     },
