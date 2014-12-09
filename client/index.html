@@ -32,6 +32,7 @@
             <ul>
                 <li data-ng-repeat="canteen in canteens">
                     <span>{{ canteen.title }}</span>
+                    <img ng-src="{{ canteen.image.url }}"/>
                 </li>
             </ul>
         </div>
@@ -39,7 +40,7 @@
             <ul>
                 <li data-ng-repeat="category in newsCategories">
                     <span>{{ category.title }}</span>
-                    <img ng-src="{{ category.image.url }}" />
+                    <img ng-src="{{ category.image.url }}"/>
                 </li>
             </ul>
         </div>
