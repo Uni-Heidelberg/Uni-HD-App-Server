@@ -25,7 +25,7 @@ module.exports = function (agenda) {
                     json: true
                 },
                 function (error, response, talkSeries) {
-                    if (error || response.statusCode != 200) {
+                    if (error || response.statusCode !== 200) {
                         console.log(error);
                         console.log(response.statusCode);
                         done(null);
@@ -33,10 +33,10 @@ module.exports = function (agenda) {
                     }
 
                     NewsSource.find({
-                            "where": {
-                                "type": "hephysto"
+                            'where': {
+                                'type': 'hephysto'
                             }
-                        }, function (err, eventSources) {
+                        }, function (err, sources) {
                             if (err) {
                                 console.error(err);
                                 return;
@@ -44,49 +44,47 @@ module.exports = function (agenda) {
 
                             var notToInsertIds = [];
 
-                            for (var dbI = 0; dbI < eventSources.length; dbI++) {
-                                var eventSource = eventSources[dbI];
-
+                            sources.forEach(function (source) {
                                 var found = false;
 
-                                for (var sId = 0; sId < talkSeries.length; sId++) {
-                                    var talkSerie = talkSeries[sId];
+                                talkSeries.forEach(
+                                    function (talkSerie) {
+                                        if (source.options === null) {
+                                            NewsSource.destroyById(source.id);
+                                            return;
+                                        }
+                                        if (
+                                            source.options.hephysto &&
+                                            source.options.hephysto.id === talkSerie.eventId
+                                        ) {
+                                            found = true;
+                                            notToInsertIds.push(talkSerie.eventId);
 
-                                    if (eventSource.options === null) {
-                                        NewsSource.destroyById(eventSource.id);
-                                        break;
+                                            source.name = talkSerie.name;
+                                            source.url = talkSerie.website;
+                                            source.options.building = talkSerie.building;
+                                            source.options.room = talkSerie.room;
+                                            source.options.defaultDate = talkSerie.dateTime;
+
+                                            source.categoryId = data.categoryId;
+
+                                            source.save();
+                                            return;
+                                        }
                                     }
-                                    if (eventSource.options.hephysto
-                                        && eventSource.options.hephysto.id == talkSerie.eventId
-                                    ) {
-                                        found = true;
-                                        notToInsertIds.push(talkSerie.eventId);
-
-                                        eventSource.name = talkSerie.name;
-                                        eventSource.url = talkSerie.website;
-                                        eventSource.options.building = talkSerie.building;
-                                        eventSource.options.room = talkSerie.room;
-                                        eventSource.options.defaultDate = talkSerie.dateTime;
-
-                                        eventSource.categoryId = data.categoryId;
-
-                                        eventSource.save();
-                                        break;
-                                    }
-                                }
+                                );
 
                                 if (!found) {
-                                    NewsSource.destroyById(eventSource.id);
+                                    NewsSource.destroyById(source.id);
                                 }
-                            }
+                            });
 
-                            for (var i = 0; i < talkSeries.length; i++) {
-                                var talkSerie = talkSeries[i];
-                                if (notToInsertIds.indexOf(talkSerie.eventId) != -1) {
-                                    continue;
+                            talkSeries.forEach(function (talkSerie) {
+                                if (notToInsertIds.indexOf(talkSerie.eventId) !== -1) {
+                                    return;
                                 }
 
-                                var eventSourceData = {
+                                var sourceData = {
                                     name: talkSerie.name,
                                     type: 'hephysto',
                                     url: nullOrString(talkSerie.website),
@@ -102,15 +100,18 @@ module.exports = function (agenda) {
                                     categoryId: data.categoryId
                                 };
 
-                                NewsSource.create(eventSourceData, function (err, eventSource) {
+                                NewsSource.create(sourceData, function (err, source) {
                                     if (err) {
-                                        console.warn('reload hephysto sources:');
-                                        console.warn(err.message);
+                                        console.warn(
+                                            'reload hephysto sources:',
+                                            err,
+                                            source
+                                        );
                                     }
                                 });
-                            }
+                            });
 
-                            if (job.attrs.type == 'normal') {
+                            if (job.attrs.type === 'normal') {
                                 job.remove(function () {
                                 });
                             }

@@ -18,8 +18,8 @@ module.exports = function (agenda) {
             console.log('Starting parsing hephysto data');
 
             NewsSource.find({
-                "where": {
-                    "type": "hephysto"
+                'where': {
+                    'type': 'hephysto'
                 }
             }, function (err, hephystos) {
                 if (err) {
@@ -36,21 +36,20 @@ module.exports = function (agenda) {
                                 url: hephysto.options.hephysto.url,
                                 json: true
                             }, function (err, response, body) {
-                                if (err || response.statusCode != 200) {
+                                if (err || response.statusCode !== 200) {
                                     console.warn('hephystoParser', err);
                                     return callback('request error');
                                 }
                                 async.each(
                                     body,
                                     function (hephystoTalk, callback) {
-                                        var eventData = {
+                                        var talkData = {
                                             title: hephystoTalk.title,
                                             date: hephystoTalk.date,
                                             abstract: nullOrString(hephystoTalk.abstract),
                                             building: md(hephystoTalk.building),
                                             room: md(hephystoTalk.room),
                                             url: hephystoTalk.url,
-                                            urlHash: 'hephysto:' + hephystoTalk.talkSeriesId + ':' + hephystoTalk.talkId,
 
                                             source: hephysto,
 
@@ -60,29 +59,32 @@ module.exports = function (agenda) {
                                             speakerEmail: nullOrString(hephystoTalk.speaker.email)
                                         };
 
+                                        talkData.urlHash =
+                                            'hephysto:' + hephystoTalk.talkSeriesId + ':' + hephystoTalk.talkId;
+
                                         NewsTalk.findOrCreate(
                                             {
                                                 where: {
-                                                    urlHash: eventData.urlHash
+                                                    urlHash: talkData.urlHash
                                                 }
                                             },
-                                            eventData,
+                                            talkData,
                                             function (err, talk) {
                                                 if (err) {
                                                     return callback(err);
                                                 }
 
-                                                talk.title = eventData.title;
-                                                talk.date = eventData.date;
-                                                talk.abstract = eventData.abstract;
-                                                talk.building = eventData.building;
-                                                talk.room = eventData.room;
-                                                talk.url = eventData.url;
+                                                talk.title = talkData.title;
+                                                talk.date = talkData.date;
+                                                talk.abstract = talkData.abstract;
+                                                talk.building = talkData.building;
+                                                talk.room = talkData.room;
+                                                talk.url = talkData.url;
 
-                                                talk.speakerName = eventData.speakerName;
-                                                talk.speakerAffiliation = eventData.speakerAffiliation;
-                                                talk.speakerUrl = eventData.speakerUrl;
-                                                talk.speakerEmail = eventData.speakerEmail;
+                                                talk.speakerName = talkData.speakerName;
+                                                talk.speakerAffiliation = talkData.speakerAffiliation;
+                                                talk.speakerUrl = talkData.speakerUrl;
+                                                talk.speakerEmail = talkData.speakerEmail;
 
                                                 talk.save();
 

@@ -24,8 +24,8 @@ module.exports = function (agenda) {
 
             // Suche alle Mensen
             Canteen.find({
-                "where": {
-                    "parsable": true
+                'where': {
+                    'parsable': true
                 }
             }, function (err, canteens) {
                 if (err) {
@@ -90,7 +90,12 @@ module.exports = function (agenda) {
 
                                                 switch (i) {
                                                     case 0:
-                                                        mealData.title = el.text().trim().replace(/\n/g, '').replace(/ \([\d, ]*\)/, '');
+                                                        mealData.title =
+                                                            el
+                                                                .text()
+                                                                .trim()
+                                                                .replace(/\n/g, '')
+                                                                .replace(/ \([\d, ]*\)/, '');
                                                         break;
                                                     case 1:
                                                         mealData.sectionTitle = el.text().trim();
@@ -138,7 +143,11 @@ module.exports = function (agenda) {
                                                         dailyMenuData,
                                                         function (err, menu) {
                                                             if (err || menu === null) {
-                                                                console.warn('Error finding or creating daily menu', err, menu);
+                                                                console.warn(
+                                                                    'Error finding or creating daily menu',
+                                                                    err,
+                                                                    menu
+                                                                );
                                                                 return;
                                                             }
                                                             delete mealData.sectionTitle;
@@ -157,12 +166,19 @@ module.exports = function (agenda) {
                                                                 mealData,
                                                                 function (err, meal) {
                                                                     if (err || meal === null) {
-                                                                        console.warn('Error finding or creating meal', err, meal);
+                                                                        console.warn(
+                                                                            'Error finding or creating meal',
+                                                                            err,
+                                                                            meal
+                                                                        );
                                                                         return;
                                                                     }
                                                                     menu.meals.add(meal, function (err) {
                                                                         if (err) {
-                                                                            console.warn('Error adding meal to menu', err);
+                                                                            console.warn(
+                                                                                'Error adding meal to menu',
+                                                                                err
+                                                                            );
                                                                             return;
                                                                         }
                                                                     });

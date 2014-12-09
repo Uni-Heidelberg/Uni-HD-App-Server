@@ -11,63 +11,13 @@ var NewsSource = app.models.NewsSource;
 var NewsArticle = app.models.NewsArticle;
 
 
-module.exports = function (agenda) {
-    agenda.define(
-        'parse feeds',
-        function (job, done) {
-            console.log('Starting parsing news feeds');
-
-            NewsSource.find({
-                "where": {
-                    "type": "feed"
-                }
-            }, function (err, feeds) {
-                if (err) {
-                    return console.warn('feedParser: ', err);
-                }
-                async.each(
-                    feeds,
-                    parseFeed,
-                    function (err) {
-                        if (err) {
-                            console.warn('feedParser: ', err);
-                        }
-                    }
-                );
-            });
-
-            done();
-        }
-    );
-};
-
-var parseFeed = function (feed, callback) {
-    if (!feed instanceof app.models.NewsSource) {
-        throw "wrong data type supplied";
-    }
-
-    console.log('Updating feed...' + feed.url);
-    feedRead(
-        feed.url,
-        function (err, articles) {
-            if (err) {
-                return console.warn('feedParser', err);
-            }
-            async.each(
-                articles,
-                makeFeedArticleParser(feed)
-            );
-        }
-    );
-};
-
 var makeFeedArticleParser = function (feed) {
     return function (feedArticle, callback) {
         if (
-            !feedArticle.published
-            || feedArticle.published.getFullYear() < 2010
-            || feedArticle.content.length < 5
-            || feedArticle.published.toString() === 'Invalid Date'
+            !feedArticle.published ||
+            feedArticle.published.getFullYear() < 2010 ||
+            feedArticle.content.length < 5 ||
+            feedArticle.published.toString() === 'Invalid Date'
         ) {
             return callback(null);
         }
@@ -82,7 +32,7 @@ var makeFeedArticleParser = function (feed) {
         };
         request.get(
             feedArticle.link,
-            (function (articleData, feed) {
+            (function (articleData, feed, callback) {
                 return function (err, res) {
                     if (err) {
                         return console.warn('feedParser', err);
@@ -117,4 +67,57 @@ var makeFeedArticleParser = function (feed) {
             })(articleData, feed, callback)
         );
     };
+};
+
+var parseFeed = function (feed, callback) {
+    if (!feed instanceof app.models.NewsSource) {
+        throw 'wrong data type supplied';
+    }
+
+    console.log('Updating feed...' + feed.url);
+    feedRead(
+        feed.url,
+        function (err, articles) {
+            if (err) {
+                return console.warn('feedParser', err);
+            }
+            async.each(
+                articles,
+                makeFeedArticleParser(feed),
+                function (err) {
+                    callback(err);
+                }
+            );
+        }
+    );
+};
+
+module.exports = function (agenda) {
+    agenda.define(
+        'parse feeds',
+        function (job, done) {
+            console.log('Starting parsing news feeds');
+
+            NewsSource.find({
+                'where': {
+                    'type': 'feed'
+                }
+            }, function (err, feeds) {
+                if (err) {
+                    return console.warn('feedParser: ', err);
+                }
+                async.each(
+                    feeds,
+                    parseFeed,
+                    function (err) {
+                        if (err) {
+                            console.warn('feedParser: ', err);
+                        }
+                    }
+                );
+            });
+
+            done();
+        }
+    );
 };

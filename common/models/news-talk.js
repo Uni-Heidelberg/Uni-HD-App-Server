@@ -17,7 +17,7 @@ module.exports = function (NewsTalk) {
     }
 
     NewsTalk.afterRemote('**', function (ctx, models, next) {
-        if (ctx.req.query.speaker && ctx.req.query.speaker == "object") {
+        if (ctx.req.query.speaker && ctx.req.query.speaker === 'object') {
             if (models instanceof NewsTalk) {
                 changeToSpeakerObject(models);
             }
