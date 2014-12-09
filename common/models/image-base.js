@@ -1,5 +1,3 @@
-var app = require('../../server/server');
-
 module.exports = function (ImageBase) {
     var createImageObject = function (modelInstance) {
         if (modelInstance.imageContainer && modelInstance.imageName) {
@@ -12,7 +10,7 @@ module.exports = function (ImageBase) {
                 modelInstance.image = null;
             } else {
                 modelInstance.image.url =
-                    app.get('restApiRoot') +
+                    ImageBase.app.get('restApiRoot') +
                     '/storage/' + modelInstance.imageContainer +
                     '/download/' + modelInstance.imageName;
                 modelInstance.image.mtime = modelInstance.imageModified;
@@ -30,17 +28,21 @@ module.exports = function (ImageBase) {
         delete modelInstance.image;
 
         if (modelInstance.imageContainer && modelInstance.imageName) {
-            app.models.Storage.getFile(modelInstance.imageContainer, modelInstance.imageName, function (err, file) {
-                if (err) {
-                    modelInstance.imageError = err.toString();
-                } else {
-                    modelInstance.imageModified = file.mtime;
-                    modelInstance.imageError = null;
-                    modelInstance.imageLastCheck = new Date();
-                }
+            ImageBase.app.models.Storage.getFile(
+                modelInstance.imageContainer,
+                modelInstance.imageName,
+                function (err, file) {
+                    if (err) {
+                        modelInstance.imageError = err.toString();
+                    } else {
+                        modelInstance.imageModified = file.mtime;
+                        modelInstance.imageError = null;
+                        modelInstance.imageLastCheck = new Date();
+                    }
 
-                next();
-            });
+                    next();
+                }
+            );
         } else {
             modelInstance.imageModified = null;
             modelInstance.imageError = null;
