@@ -19,6 +19,11 @@ module.exports = function (agenda) {
             console.log('Reload hephysto sources');
             var data = job.attrs.data;
 
+            if (!(data && data.categoryId)) {
+                done('no categoryId submitted');
+                return;
+            }
+
             request(
                 {
                     url: urls.all,
@@ -26,9 +31,7 @@ module.exports = function (agenda) {
                 },
                 function (error, response, talkSeries) {
                     if (error || response.statusCode !== 200) {
-                        console.log(error);
-                        console.log(response.statusCode);
-                        done(null);
+                        done(error);
                         return;
                     }
 
@@ -110,11 +113,6 @@ module.exports = function (agenda) {
                                     }
                                 });
                             });
-
-                            if (job.attrs.type === 'normal') {
-                                job.remove(function () {
-                                });
-                            }
                             done();
                         }
                     );

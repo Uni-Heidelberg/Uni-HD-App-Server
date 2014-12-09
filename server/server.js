@@ -1,4 +1,4 @@
-require("clim")(console, true);
+require('clim')(console, true);
 
 var loopback = require('loopback');
 var boot = require('loopback-boot');
@@ -38,60 +38,6 @@ app.start = function () {
         console.log('Web server listening at: %s', app.get('url'));
     });
 };
-
-var Agenda = require('agenda');
-
-var agenda = new Agenda(
-    {
-        'db': {
-            'address': 'localhost:27017/appserver'
-        }
-    }
-);
-
-jobTypes = [
-    'canteenParser',
-    'feedParser',
-    'hephystoParser',
-    'reloadHephystoSources'
-];
-
-jobTypes.forEach(function (type) {
-    require('./lib/jobs/' + type)(agenda);
-});
-
-agenda.every(app.get('feed interval'), 'parse feeds');
-agenda.every(app.get('canteen interval'), 'parse canteens');
-agenda.every(app.get('hephysto interval'), 'parse hephysto');
-
-app.models.NewsCategory.findOne(
-    {
-        where: {
-            title: 'Kolloquien'
-        }
-    },
-    function (err, category) {
-        if (err || category === null) {
-            return console.error(err);
-        }
-        agenda.now('reload hephysto sources', {categoryId: category.id});
-    }
-);
-
-agenda.start();
-
-agenda.purge(function (err, numRemoved) {
-    console.log(numRemoved);
-});
-
-function graceful() {
-    agenda.stop(function () {
-        process.exit(0);
-    });
-}
-
-process.on('SIGTERM', graceful);
-process.on('SIGINT', graceful);
 
 // start the server if `$ node server.js`
 if (require.main === module) {

@@ -69,5 +69,9 @@
     "ImageBase": {
         "dataSource": "db",
         "public": false
+    },
+    "Job": {
+        "dataSource": "appserver",
+        "public": false
     }
 }

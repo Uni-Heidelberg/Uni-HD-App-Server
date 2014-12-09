@@ -35,7 +35,8 @@ var makeFeedArticleParser = function (feed) {
             (function (articleData, feed, callback) {
                 return function (err, res) {
                     if (err) {
-                        return console.warn('feedParser', err);
+                        console.warn(err);
+                        return callback(null);
                     }
                     articleData.url = res.request.uri.href;
                     articleData.urlHash =
@@ -48,17 +49,18 @@ var makeFeedArticleParser = function (feed) {
                         articleData,
                         function (err, article) {
                             if (err) {
-                                return console.warn('feedParser', err);
+                                console.log(err);
+                            } else {
+                                article.title = articleData.title;
+                                article.date = articleData.date;
+                                article.abstract =
+                                    articleData
+                                        .abstract
+                                        .replace(/\\/, '')
+                                        .replace(/\\\./, '.');
+                                article.source(feed);
+                                article.save();
                             }
-                            article.title = articleData.title;
-                            article.date = articleData.date;
-                            article.abstract =
-                                articleData
-                                    .abstract
-                                    .replace(/\\/, '')
-                                    .replace(/\\\./, '.');
-                            article.source(feed);
-                            article.save();
 
                             callback(null);
                         }
@@ -79,14 +81,12 @@ var parseFeed = function (feed, callback) {
         feed.url,
         function (err, articles) {
             if (err) {
-                return console.warn('feedParser', err);
+                return callback(err);
             }
             async.each(
                 articles,
                 makeFeedArticleParser(feed),
-                function (err) {
-                    callback(err);
-                }
+                callback
             );
         }
     );
@@ -96,8 +96,6 @@ module.exports = function (agenda) {
     agenda.define(
         'parse feeds',
         function (job, done) {
-            console.log('Starting parsing news feeds');
-
             NewsSource.find({
                 'where': {
                     'type': 'feed'
@@ -109,15 +107,9 @@ module.exports = function (agenda) {
                 async.each(
                     feeds,
                     parseFeed,
-                    function (err) {
-                        if (err) {
-                            console.warn('feedParser: ', err);
-                        }
-                    }
+                    done
                 );
             });
-
-            done();
         }
     );
 };
