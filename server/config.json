@@ -4,5 +4,6 @@
     "port": 3000,
     "feed interval": "hour",
     "canteen interval": "hour",
-    "hephysto interval": "hour"
+    "hephysto interval": "hour",
+    "job scheduler interval": "* * * * *"
 }

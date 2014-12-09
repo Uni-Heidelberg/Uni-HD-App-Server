@@ -21,7 +21,7 @@ var makeFeedArticleParser = function (feed) {
         ) {
             return callback(null);
         }
-        if (feedArticle.link.indexOf('http://') === -1) {
+        if (feedArticle.link.indexOf('http://') === -1 && feedArticle.link.indexOf('https://') === -1) {
             feedArticle.link = 'http://' + feedArticle.link;
         }
         var articleData = {

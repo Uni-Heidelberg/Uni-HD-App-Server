@@ -27,7 +27,7 @@ module.exports = function (app) {
     agenda.every(app.get('canteen interval'), 'parse canteens');
     agenda.every(app.get('hephysto interval'), 'parse hephysto');
 
-    agenda.every('* * * * *', 'job scheduler');
+    agenda.every(app.get('job scheduler interval'), 'job scheduler');
 
     agenda.on('start', function (job) {
         console.log('Job starting: %s', job.attrs.name);
