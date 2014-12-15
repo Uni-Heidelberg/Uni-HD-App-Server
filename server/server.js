@@ -44,5 +44,6 @@ if (require.main === module && !process.env.AGENDA) {
     app.start();
 } else if (process.env.AGENDA) {
     app.agenda.start();
+    console.log('Job processor started!');
 }
 
