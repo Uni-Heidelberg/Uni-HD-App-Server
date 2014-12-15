@@ -9,6 +9,9 @@
         "imageName": {
             "type": "string"
         },
+        "imageUrl": {
+            "type": "string"
+        },
         "imageModified": {
             "type": "date"
         },

@@ -1,28 +1,9 @@
 module.exports = function (ImageBase) {
-    var createImageObject = function (modelInstance) {
-        if (modelInstance.imageContainer && modelInstance.imageName) {
-            modelInstance.image = {};
-
-            if (modelInstance.imageError) {
-                modelInstance.image.error = modelInstance.imageError;
-            } else if (!modelInstance.imageModified) {
-                modelInstance.save();
-                modelInstance.image = null;
-            } else {
-                modelInstance.image.url =
-                    'http://appserver.physik.uni-heidelberg.de' +
-                    ImageBase.app.get('restApiRoot') +
-                    '/storage/' + modelInstance.imageContainer +
-                    '/download/' + modelInstance.imageName;
-                modelInstance.image.modified = modelInstance.imageModified;
-            }
-        } else {
-            modelInstance.image = null;
-        }
-    };
 
     ImageBase.afterInitialize = function () {
-        createImageObject(this);
+        if (!this.imageError && !this.imageModified) {
+            this.save();
+        }
     };
 
     ImageBase.beforeSave = function (next, modelInstance) {
@@ -34,10 +15,16 @@ module.exports = function (ImageBase) {
                 modelInstance.imageName,
                 function (err, file) {
                     if (err) {
+                        modelInstance.imageUrl = null;
                         modelInstance.imageError = err.toString();
                     } else {
+                        modelInstance.imageUrl =
+                            'http://appserver.physik.uni-heidelberg.de/static/storage/' +
+                            modelInstance.imageContainer + '/' + modelInstance.imageName;
+
                         modelInstance.imageModified = file.mtime;
                         modelInstance.imageError = null;
+
                         modelInstance.imageLastCheck = new Date();
                     }
 
@@ -45,9 +32,10 @@ module.exports = function (ImageBase) {
                 }
             );
         } else {
+            modelInstance.imageUrl = null;
             modelInstance.imageModified = null;
-            modelInstance.imageError = null;
             modelInstance.imageLastCheck = null;
+            modelInstance.imageError = null;
 
             next();
         }
