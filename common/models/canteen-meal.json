@@ -3,7 +3,7 @@
     "base": "PersistedModel",
     "indexes": {
         "uniqueIndex": {
-            "columns": "title, priceStud, priceBed, priceGuest",
+            "columns": "title, priceStud, priceBed, priceGuest, vegetarian",
             "kind": "unique"
         }
     },
@@ -36,6 +36,11 @@
             "dataType": "double"
         },
         "vegetarian": {
+            "type": "boolean",
+            "default": false,
+            "null": false
+        },
+        "isMain": {
             "type": "boolean",
             "default": false,
             "null": false

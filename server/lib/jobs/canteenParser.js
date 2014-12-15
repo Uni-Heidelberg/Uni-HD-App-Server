@@ -113,6 +113,10 @@ module.exports = function (agenda) {
                                                 }
                                             });
 
+                                            if (mealData.priceStud > 1.3) {
+                                                mealData.isMain = true;
+                                            }
+
                                             mealData.vegetarian = mealData.title.indexOf('veget.') > 0;
                                             mealData.title = mealData.title.replace(/\ \(veget\.\)/, '');
 
@@ -161,7 +165,15 @@ module.exports = function (agenda) {
                                                              });*/
 
                                                             CanteenMeal.findOrCreate(
-                                                                {'where': mealData},
+                                                                {
+                                                                    'where': {
+                                                                        'title': mealData.title,
+                                                                        'priceStud': mealData.priceStud,
+                                                                        'priceBed': mealData.priceBed,
+                                                                        'priceGuest': mealData.priceGuest,
+                                                                        'vegetarian': mealData.vegetarian
+                                                                    }
+                                                                },
                                                                 mealData,
                                                                 function (err, meal) {
                                                                     if (err || meal === null) {
@@ -172,6 +184,8 @@ module.exports = function (agenda) {
                                                                         );
                                                                         return;
                                                                     }
+                                                                    meal.isMain = mealData.isMain;
+                                                                    meal.save();
                                                                     menu.meals.add(meal, function (err) {
                                                                         if (err) {
                                                                             console.warn(
