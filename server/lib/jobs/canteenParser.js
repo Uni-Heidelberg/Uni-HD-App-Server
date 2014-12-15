@@ -3,20 +3,19 @@
  * @type {exports}
  */
 
-var app = require('../../server');
-
-var jsdom = require('jsdom');
-var jQuery = require('jquery');
-var async = require('async');
-
-// Importieren der Module in den lokalen Namensraum
-var Canteen = app.models.Canteen;
-var CanteenDailyMenu = app.models.CanteenDailyMenu;
-var CanteenMeal = app.models.CanteenMeal;
-var CanteenSection = app.models.CanteenSection;
-
-
 module.exports = function (agenda) {
+    var app = require('../../server');
+
+    var jsdom = require('jsdom');
+    var jQuery = require('jquery');
+    var async = require('async');
+
+    // Importieren der Module in den lokalen Namensraum
+    var Canteen = app.models.Canteen;
+    var CanteenDailyMenu = app.models.CanteenDailyMenu;
+    var CanteenMeal = app.models.CanteenMeal;
+    var CanteenSection = app.models.CanteenSection;
+
     agenda.define(
         'parse canteens',
         function (job, done) {
