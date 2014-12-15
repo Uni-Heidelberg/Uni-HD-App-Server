@@ -8,9 +8,10 @@ module.exports = function (app) {
             }
         }
     );
+
     app.agenda = agenda;
 
-    jobTypes = [
+    var jobTypes = [
         'canteenParser',
         'feedParser',
         'hephystoParser',
@@ -22,10 +23,6 @@ module.exports = function (app) {
     jobTypes.forEach(function (type) {
         require('../lib/jobs/' + type)(agenda);
     });
-
-    agenda.every(app.get('feed interval'), 'parse feeds');
-    agenda.every(app.get('canteen interval'), 'parse canteens');
-    agenda.every(app.get('hephysto interval'), 'parse hephysto');
 
     agenda.every(app.get('job scheduler interval'), 'job scheduler');
 
@@ -39,12 +36,6 @@ module.exports = function (app) {
 
     agenda.on('fail', function (err, job) {
         console.log('Job failed:', job.attrs.name, err);
-    });
-
-    agenda.start();
-
-    agenda.purge(function (err, numRemoved) {
-        console.log('agenda purged rows:', numRemoved);
     });
 
     var agendaUI;
