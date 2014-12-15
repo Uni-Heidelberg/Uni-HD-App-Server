@@ -1,14 +1,12 @@
 module.exports = function (ImageBase) {
 
     ImageBase.afterInitialize = function () {
-        if (!this.imageError && !this.imageModified) {
+        if (!this.imageError && !this.imageLastCheck) {
             this.save();
         }
     };
 
     ImageBase.beforeSave = function (next, modelInstance) {
-        delete modelInstance.image;
-
         if (modelInstance.imageContainer && modelInstance.imageName) {
             ImageBase.app.models.Storage.getFile(
                 modelInstance.imageContainer,
@@ -34,7 +32,7 @@ module.exports = function (ImageBase) {
         } else {
             modelInstance.imageUrl = null;
             modelInstance.imageModified = null;
-            modelInstance.imageLastCheck = null;
+            modelInstance.imageLastCheck = new Date();
             modelInstance.imageError = null;
 
             next();
