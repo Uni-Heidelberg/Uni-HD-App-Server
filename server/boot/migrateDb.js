@@ -38,7 +38,7 @@ module.exports = function (app) {
             });
 
             NewsCategory.create({
-                title: 'Physik'
+                title: 'Fakultät für Physik und Astronomie'
             }, function (err, category) {
                 if (err || category === null) {
                     throw err;
@@ -57,11 +57,22 @@ module.exports = function (app) {
 
                 NewsSource.create({
                     type: 'feed',
-                    name: 'Kirchhoff Instituts für Physik',
+                    name: 'Kirchhoff Institut für Physik',
                     url: 'http://www.kip.uni-heidelberg.de/rss/rss.xml',
                     category: category
                 }, function (err, source) {
                     if (err || source === null) {
+                        throw err;
+                    }
+                });
+
+                NewsSource.create({
+                   type: 'feed',
+                    name: 'Fachschaft MathPhys',
+                    url: 'https://mathphys.fsk.uni-heidelberg.de/w/feed/',
+                    category: category
+                }, function(err, source) {
+                    if(err || source === null) {
                         throw err;
                     }
                 });

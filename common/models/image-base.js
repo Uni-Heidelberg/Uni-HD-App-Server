@@ -13,7 +13,7 @@ module.exports = function (ImageBase) {
                     ImageBase.app.get('restApiRoot') +
                     '/storage/' + modelInstance.imageContainer +
                     '/download/' + modelInstance.imageName;
-                modelInstance.image.mtime = modelInstance.imageModified;
+                modelInstance.image.modified = modelInstance.imageModified;
             }
         } else {
             modelInstance.image = null;
