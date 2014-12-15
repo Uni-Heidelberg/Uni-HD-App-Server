@@ -10,6 +10,7 @@ module.exports = function (ImageBase) {
                 modelInstance.image = null;
             } else {
                 modelInstance.image.url =
+                    'http://appserver.physik.uni-heidelberg.de' +
                     ImageBase.app.get('restApiRoot') +
                     '/storage/' + modelInstance.imageContainer +
                     '/download/' + modelInstance.imageName;
