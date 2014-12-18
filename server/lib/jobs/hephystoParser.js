@@ -1,17 +1,18 @@
-var app = require('../../server');
+'use strict';
+
 var request = require('request');
 var async = require('async');
 
 var md = require('html-md');
 
-var NewsSource = app.models.NewsSource;
-var NewsTalk = app.models.NewsTalk;
-
 var nullOrString = function (testStr) {
     return testStr.length > 0 ? testStr : null;
 };
 
-module.exports = function (agenda) {
+module.exports = function (agenda, app) {
+    var NewsSource = app.models.NewsSource;
+    var NewsTalk = app.models.NewsTalk;
+
     agenda.define(
         'parse hephysto',
         function (job, done) {

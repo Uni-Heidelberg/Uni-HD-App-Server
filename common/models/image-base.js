@@ -1,7 +1,9 @@
+'use strict';
+
 module.exports = function (ImageBase) {
 
     ImageBase.afterInitialize = function () {
-        if (!this.imageError && !this.imageLastCheck) {
+        if (!this.imageLastCheck) {
             this.save();
         }
     };

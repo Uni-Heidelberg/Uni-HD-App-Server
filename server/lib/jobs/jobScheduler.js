@@ -1,7 +1,8 @@
-var app = require('../../server');
+'use strict';
+
 var async = require('async');
 
-module.exports = function (agenda) {
+module.exports = function (agenda, app) {
     agenda.define(
         'job scheduler',
         function (job, done) {

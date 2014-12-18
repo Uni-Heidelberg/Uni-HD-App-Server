@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = function (app) {
     var Agenda = require('agenda');
 
@@ -21,7 +23,7 @@ module.exports = function (app) {
     ];
 
     jobTypes.forEach(function (type) {
-        require('../lib/jobs/' + type)(agenda);
+        require('../lib/jobs/' + type)(agenda, app);
     });
 
     agenda.every(app.get('job scheduler interval'), 'job scheduler');

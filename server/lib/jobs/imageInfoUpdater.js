@@ -1,6 +1,6 @@
-var app = require('../../server');
+'use strict';
 
-module.exports = function (agenda) {
+module.exports = function (agenda, app) {
     agenda.define(
         'image info updater',
         function (job, done) {

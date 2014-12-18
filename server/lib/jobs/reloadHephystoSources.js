@@ -1,18 +1,19 @@
-var app = require('../../server');
-var request = require('request');
+'use strict';
 
-var NewsSource = app.models.NewsSource;
+module.exports = function (agenda, app) {
+    var request = require('request');
 
-var urls = {
-    all: 'http://www.physik.uni-heidelberg.de/hephysto/tools/seminarinfo.php',
-    base: 'http://www.physik.uni-heidelberg.de/hephysto/tools/seminarinfo.php?id='
-};
+    var NewsSource = app.models.NewsSource;
 
-var nullOrString = function (testStr) {
-    return testStr.length > 0 ? testStr : null;
-};
+    var urls = {
+        all: 'http://www.physik.uni-heidelberg.de/hephysto/tools/seminarinfo.php',
+        base: 'http://www.physik.uni-heidelberg.de/hephysto/tools/seminarinfo.php?id='
+    };
 
-module.exports = function (agenda) {
+    function nullOrString (testStr) {
+        return testStr.length > 0 ? testStr : null;
+    }
+
     agenda.define(
         'reload hephysto sources',
         function (job, done) {

@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = function (NewsTalk) {
     function changeToSpeakerObject(model) {
         if (!model instanceof NewsTalk) {
