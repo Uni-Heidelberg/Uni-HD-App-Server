@@ -18,7 +18,10 @@ module.exports = function (agenda, app) {
                         errs[imageModel] = err;
                     } else {
                         instances.forEach(function (instance) {
-                            instance.save();
+                            instance.updateImageInfo();
+                            instance.save(null, function(err, inst) {
+                                console.log(err, inst);
+                            });
                         });
                     }
 

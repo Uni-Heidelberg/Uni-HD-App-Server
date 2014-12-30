@@ -1,43 +1,48 @@
-'use strict';
-
 module.exports = function (ImageBase) {
 
     ImageBase.afterInitialize = function () {
-        if (!this.imageLastCheck) {
-            this.save();
+        var self = this;
+        if (!self.imageLastCheck) {
+            self.updateImageInfo(function () {
+                self.save();
+            });
         }
     };
 
-    ImageBase.beforeSave = function (next, modelInstance) {
-        if (modelInstance.imageContainer && modelInstance.imageName) {
+    ImageBase.prototype.updateImageInfo = function (callback) {
+        callback = callback || function(){};
+
+        var self = this;
+        if (self.imageContainer && self.imageName) {
             ImageBase.app.models.Storage.getFile(
-                modelInstance.imageContainer,
-                modelInstance.imageName,
+                self.imageContainer,
+                self.imageName,
                 function (err, file) {
                     if (err) {
-                        modelInstance.imageUrl = null;
-                        modelInstance.imageError = err.toString();
+                        self.imageUrl = null;
+                        self.imageError = err.toString();
+                        self.imageLastCheck = new Date();
                     } else {
-                        modelInstance.imageUrl =
+                        self.imageUrl =
                             'http://appserver.physik.uni-heidelberg.de/static/storage/' +
-                            modelInstance.imageContainer + '/' + modelInstance.imageName;
+                            self.imageContainer + '/' + self.imageName;
 
-                        modelInstance.imageModified = file.mtime;
-                        modelInstance.imageError = null;
+                        self.imageModified = file.mtime;
+                        self.imageError = null;
 
-                        modelInstance.imageLastCheck = new Date();
+                        self.imageLastCheck = new Date();
                     }
 
-                    next();
+                    callback();
                 }
             );
         } else {
-            modelInstance.imageUrl = null;
-            modelInstance.imageModified = null;
-            modelInstance.imageLastCheck = new Date();
-            modelInstance.imageError = null;
+            self.imageUrl = null;
+            self.imageModified = null;
+            self.imageLastCheck = new Date();
+            self.imageError = null;
 
-            next();
+            callback();
         }
     };
 
