@@ -7,24 +7,10 @@ echo 'mysql-server mysql-server/root_password password appserver' | sudo debconf
 echo 'mysql-server mysql-server/root_password_again password appserver' | sudo debconf-set-selections
 sudo apt-get -y install git-core curl build-essential openssl libssl-dev
 sudo apt-get -y -t wheezy-backports install mongodb
-sudo chown -R $USER /usr/local
-cd
-git clone https://github.com/joyent/node.git
-cd node
-git checkout v0.10.33
-./configure
-make
-make install
-cd
-git clone https://github.com/npm/npm.git
-cd npm
-git checkout v2.1.8
-./configure
-make
-make install
-cd
-npm install -g strongloop
-npm install -g forever
+curl -sL https://deb.nodesource.com/setup | sudo bash -
+sudo apt-get install -y nodejs
+sudo npm install -g strongloop
+sudo npm install -g forever
 echo "CREATE USER 'appserver'@'localhost' IDENTIFIED BY 'appserver';GRANT USAGE ON * . * TO 'appserver'@'localhost' IDENTIFIED BY 'appserver';CREATE DATABASE IF NOT EXISTS appserver;GRANT ALL PRIVILEGES ON appserver . * TO 'appserver'@'localhost';" | mysql -u root -pvagrant
 sudo cp /vagrant/vagrant-configs/default /etc/apache2/sites-available/default
 #sudo cp /vagrant/vagrant-configs/phpmyadmin-secure.conf /etc/apache2/conf.d/phpmyadmin-secure.conf

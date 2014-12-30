@@ -212,7 +212,6 @@ module.exports = function (app) {
                 generateSampleData();
             });
         } else {
-            generateSampleData();
         }
     });
 };
