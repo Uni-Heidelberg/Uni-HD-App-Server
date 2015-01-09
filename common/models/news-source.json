@@ -45,6 +45,11 @@
             "type": "hasMany",
             "model": "NewsTalk",
             "foreignKey": "sourceId"
+        },
+        "associatedBuildings": {
+            "type": "hasAndBelongsToMany",
+            "model": "MapBuilding",
+            "foreignKey": "buildingId"
         }
     },
     "acls": [

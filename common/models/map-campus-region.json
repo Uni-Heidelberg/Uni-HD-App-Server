@@ -1,0 +1,49 @@
+{
+    "name": "MapCampusRegion",
+    "base": "PersistedModel",
+    "idInjection": true,
+    "http": {
+        "path": "map/campus-regions"
+    },
+    "properties": {
+        "title": {
+            "type": "string",
+            "required": true
+        },
+        "location": {
+            "type": "geopoint",
+            "required": true
+        },
+        "spanLatitude": {
+            "type": "number",
+            "required": true
+        },
+        "spanLongitute": {
+            "type": "number",
+            "required": true
+        }
+    },
+    "validations": [],
+    "relations": {
+        "buildings": {
+            "type": "hasMany",
+            "model": "MapBuilding",
+            "foreignKey": "campusRegionId"
+        }
+    },
+    "acls": [
+        {
+            "accessType": "WRITE",
+            "principalType": "ROLE",
+            "principalId": "$everyone",
+            "permission": "DENY"
+        },
+        {
+            "accessType": "EXECUTE",
+            "principalType": "ROLE",
+            "principalId": "$everyone",
+            "permission": "DENY"
+        }
+    ],
+    "methods": []
+}

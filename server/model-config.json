@@ -73,5 +73,17 @@
     "Job": {
         "dataSource": "appserver",
         "public": false
+    },
+    "MapBuilding": {
+        "dataSource": "appserver",
+        "public": true
+    },
+    "MapCampusRegion": {
+        "dataSource": "appserver",
+        "public": true
+    },
+    "MapCategory": {
+        "dataSource": "appserver",
+        "public": true
     }
 }

@@ -1,0 +1,80 @@
+{
+    "name": "MapBuilding",
+    "base": "ImageBase",
+    "idInjection": true,
+    "http": {
+        "path": "map/buildings"
+    },
+    "properties": {
+        "title": {
+            "type": "string",
+            "required": true
+        },
+        "street": {
+            "type": "string",
+            "required": true
+        },
+        "postalCode": {
+            "type": "string",
+            "required": true
+        },
+        "city": {
+            "type": "string",
+            "required": true
+        },
+        "location": {
+            "type": "geopoint",
+            "required": true
+        },
+        "spanLatitude": {
+            "type": "number",
+            "required": true
+        },
+        "spanLongitude": {
+            "type": "number",
+            "required": true
+        },
+        "keywords": {
+            "type": "string",
+            "required": true
+        }
+    },
+    "validations": [],
+    "relations": {
+        "campusRegion": {
+            "type": "belongsTo",
+            "model": "MapCampusRegion",
+            "foreignKey": "campusRegionId"
+        },
+        "category": {
+            "type": "belongsTo",
+            "model": "MapCategory",
+            "foreignKey": "categoryId"
+        },
+        "events": {
+            "type": "hasMany",
+            "model": "NewsEvent",
+            "foreignKey": "buildingId"
+        },
+        "associatedNewsSources": {
+            "type": "hasAndBelongsToMany",
+            "model": "NewsSource",
+            "foreignKey": "newsSourceId"
+        }
+    },
+    "acls": [
+        {
+            "accessType": "WRITE",
+            "principalType": "ROLE",
+            "principalId": "$everyone",
+            "permission": "DENY"
+        },
+        {
+            "accessType": "EXECUTE",
+            "principalType": "ROLE",
+            "principalId": "$everyone",
+            "permission": "DENY"
+        }
+    ],
+    "methods": []
+}

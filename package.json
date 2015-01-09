@@ -1,6 +1,6 @@
 {
     "name": "unihd-appserver",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "description": "Uni HD App Server",
     "main": "server/server.js",
     "scripts": {
